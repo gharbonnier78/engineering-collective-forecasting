@@ -1,0 +1,89 @@
+A good contract is not merely precise. It should satisfy four criteria:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{important}: the outcome has genuine engineering relevance;
+  \item \textbf{uncertain}: the answer is not already known at forecast time;
+  \item \textbf{resolvable}: the outcome can be adjudicated objectively;
+  \item \textbf{information-distributed}: multiple legitimate perspectives may hold different signals.
+\end{enumerate}
+
+\section{Study 0 design}
+\subsection{Shadow-mode objective}
+Study~0 forecasts outcomes of engineering activities already scheduled for operational reasons. It does not create tests, delay releases, alter gate definitions or allocate engineering work to generate a research outcome.
+
+Candidate event families include contract-test completion, qualification defect discovery, performance-threshold demonstration, environment-readiness criteria, migration rehearsal windows, pipeline completion, evidence-package completeness and frozen AI-pilot acceptance criteria. Subjective questions such as ''Will the release be successful?'' are excluded initially.
+
+\subsection{Participant sequence}
+For each contract:
+\begin{enumerate}[leftmargin=*]
+  \item freeze the Forecast Contract;
+  \item elicit an independent private probability $p_{ij}$ from eligible participant $i$;
+  \item freeze the private forecast before market exposure;
+  \item compute but do not operationally expose simple baselines;
+  \item open the market phase under frozen platform settings;
+  \item close before the result becomes trivially observable;
+  \item allow the pre-existing engineering process to continue;
+  \item resolve from $E_j$ using $R_j$;
+  \item score the frozen methods and retain void/interference records.
+\end{enumerate}
+
+The private-first order is essential. If participants first see a market price, subsequent ''independent'' estimates are contaminated by anchoring/social information and cannot serve as a clean simple-aggregation baseline.
+
+\subsection{Participants and metadata}
+Participation is voluntary and role-diverse by design. Relevant perspectives may include development, integration, test, architecture, platform/environment, operations, product/functional, performance or security depending on the contract. Study~0 records coarse metadata only: role category, information visibility (common/local-to-role/mixed), ability to influence the outcome (none/indirect/direct), and whether the outcome is already known. A known outcome triggers abstention.
+
+\subsection{Non-interference classification}
+Each contract receives an interference class:
+\[
+I_j\in\{0,1,2\}.
+\]
+$I=0$ denotes no observed study-caused change. $I=1$ denotes discussion/attention without material operational change. $I=2$ denotes a material change in action, decision, timing, resources or evidence-generation path attributable to forecast exposure. Study~0 excludes $I=2$ contracts from the primary predictive estimand and retains them as protocol-failure evidence.
+
+\section{Baselines and market aggregate}
+Let $n_j$ independent forecasts be collected for contract $j$. The simple mean is
+\[
+ p^{mean}_j=\frac{1}{n_j}\sum_{i=1}^{n_j}p_{ij},
+\]
+and the median is also retained. The market contributes a frozen close probability $p^M_j$. A designated-expert forecast may be added only when prospectively defined and naturally available. A structured data/model forecast may be added only when independently justified by the engineering process; it is not required for the primary study.
+
+If a platform uses an automated market maker, its algorithm, parameters, initial probability, bankroll/incentive rules, visibility rules, assistance features and software version are part of the experimental configuration. A vendor's reported ''market probability'' is not accepted as a reproducible scientific object without exportable configuration and state.
+
+\section{Primary outcome and estimand}
+For binary outcome $y_j\in\{0,1\}$, the Brier loss is
+\[
+\BS(p,y)=(p-y)^2.
+\]
+The per-contract paired difference is
+\[
+\Delta_j=\BS(p^M_j,y_j)-\BS(p^{mean}_j,y_j).
+\]
+The primary estimand over $J$ admissible resolved contracts is
+\[
+\Delta=\frac{1}{J}\sum_{j=1}^J\Delta_j.
+\]
+Negative values indicate lower observed Brier loss for the market than for the independent mean on the sampled contracts. A negative point estimate alone is not a universal superiority claim.
+
+\subsection{Dependence and clusters}
+Trades and timestamps within one market are not independent experimental units. Moreover, several Forecast Contracts can share one release, campaign or environment episode. Each contract therefore carries an optional prospective cluster identifier. Bootstrap resampling is performed at the independent operational-cluster level, preserving all member contracts when a cluster is sampled.
+
+The reference plan uses 10,000 nonparametric cluster-bootstrap resamples and a frozen integer seed, reporting a percentile 95\% interval alongside raw paired differences. With very few independent clusters, the interval is explicitly exploratory.
+
+\section{Secondary diagnostics}
+\subsection{Calibration}
+Calibration informally asks whether events forecast near probability $p$ occur near frequency $p$ over comparable cases. Study~0 is small, so reliability plots remain descriptive and must expose bin counts/uncertainty. Sparse bins are not declared ''miscalibrated'' merely because realized frequency differs from the forecast.
+
+\subsection{Sharpness}
+Sharpness measures concentration or decisiveness of forecasts independently of outcomes. It is valuable only conditional on adequate calibration; unjustified extremity should not be rewarded.
+
+\subsection{Belief dispersion}
+Independent probabilities are prospectively clipped to $[0.01,0.99]$ for the exploratory logit dispersion
+\[
+D^{belief}_j=\mathrm{SD}\left(\logit(p_{1j}),\ldots,\logit(p_{n_jj})\right).
+\]
+The goal is to distinguish genuine initial disagreement from a consensus that the market merely reproduces.
+
+\subsection{Role diversity}
+If $q_r$ is the participant fraction in role category $r$, a normalized Shannon proxy can be reported:
+\[
+D^{role}_j=-\frac{\sum_r q_r\log q_r}{\log R}.
+\]
+Role diversity is only a proxy for information diversity and cannot support a causal claim by itself.
