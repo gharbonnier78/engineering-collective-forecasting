@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gharbonnier78/engineering-collective-forecasting/schemas/forecast-contract.schema.json",
+  "title": "Engineering Forecast Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "version", "question", "outcome", "timing", "resolution", "context", "safeguards"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^FC-[A-Za-z0-9._-]+$"},
+    "version": {"type": "string", "minLength": 1},
+    "status": {"enum": ["draft", "frozen", "closed", "resolved", "void"]},
+    "question": {"type": "string", "minLength": 20},
+    "cluster_id": {"type": ["string", "null"]},
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "labels"],
+      "properties": {
+        "type": {"enum": ["binary"]},
+        "labels": {
+          "type": "object",
+          "required": ["true", "false"],
+          "additionalProperties": false,
+          "properties": {"true": {"type": "string"}, "false": {"type": "string"}}
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["opens_at", "closes_at", "resolves_no_later_than"],
+      "properties": {
+        "opens_at": {"type": "string", "format": "date-time"},
+        "closes_at": {"type": "string", "format": "date-time"},
+        "resolves_no_later_than": {"type": "string", "format": "date-time"}
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule", "authoritative_evidence", "resolver_role", "ambiguity_rule"],
+      "properties": {
+        "rule": {"type": "string", "minLength": 20},
+        "authoritative_evidence": {"type": "string", "minLength": 3},
+        "resolver_role": {"type": "string", "minLength": 2},
+        "ambiguity_rule": {"type": "string", "minLength": 10}
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shared_information", "exclusions"],
+      "properties": {
+        "shared_information": {"type": "array", "items": {"type": "string"}},
+        "exclusions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "safeguards": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shadow_mode", "visible_to_decision_owner_before_resolution", "individual_hr_use", "real_money"],
+      "properties": {
+        "shadow_mode": {"const": true},
+        "visible_to_decision_owner_before_resolution": {"const": false},
+        "individual_hr_use": {"const": false},
+        "real_money": {"const": false}
+      }
+    },
+    "freeze": {
+      "type": ["object", "null"],
+      "properties": {
+        "frozen_at": {"type": "string", "format": "date-time"},
+        "commit_or_digest": {"type": "string"}
+      },
+      "required": ["frozen_at", "commit_or_digest"],
+      "additionalProperties": false
+    }
+  }
+}
