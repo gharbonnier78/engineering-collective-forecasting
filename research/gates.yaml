@@ -1,0 +1,38 @@
+schema_version: "0.1"
+gates:
+  - id: G0
+    name: Harness binding
+    status: PASS
+    criterion: "Immutable harness ref, local manifest, AGENTS instructions, Chronicle startup record and source/claim boundaries exist."
+  - id: G1
+    name: Protocol review
+    status: PENDING_INDEPENDENT_REVIEW
+    criterion: "Study 0 protocol, preregistration, contract schema, safeguards and analysis plan receive independent review."
+  - id: G2
+    name: Organizational authorization
+    status: NOT_STARTED
+    criterion: "Any internal shadow pilot has explicit authorization for scope, participant treatment, confidentiality, and non-interference."
+  - id: G3
+    name: Prospective freeze
+    status: NOT_STARTED
+    criterion: "Study-specific preregistration and initial contracts are frozen before outcomes or market trajectories are inspected."
+  - id: G4
+    name: Pilot execution
+    status: NOT_STARTED
+    criterion: "Forecasting is executed under the frozen protocol with recoverable timestamps, configuration and evidence."
+  - id: G5
+    name: Outcome resolution
+    status: NOT_STARTED
+    criterion: "Contracts are resolved from the predeclared authoritative evidence with ambiguity/adjudication retained."
+  - id: G6
+    name: Analysis replay
+    status: NOT_STARTED
+    criterion: "Primary analysis replays from frozen data using the declared seed and event/cluster unit."
+  - id: G7
+    name: Scientific review
+    status: NOT_STARTED
+    criterion: "Results and bounded claims receive independent evidence-based review."
+  - id: G8
+    name: Operational-use consideration
+    status: BLOCKED_BY_DESIGN
+    criterion: "No forecast is allowed to influence release/governance decisions until earlier evidence supports a separately reviewed Study 1 protocol."
