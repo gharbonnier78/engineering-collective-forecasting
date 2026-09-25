@@ -1,0 +1,66 @@
+\begin{abstract}
+Engineering decisions often depend on information that is distributed across technical, operational and managerial actors and is only partially represented in structured project data. This protocol paper proposes to study internal collective forecasting---including prediction markets---as an auditable probabilistic evidence sensor rather than as a decision authority. The central object is a prospectively frozen \emph{Forecast Contract} that specifies an event, outcome space, time bounds, resolution rule, authoritative evidence and safeguards. Study~0 uses shadow mode: it forecasts outcomes of engineering activities that would occur anyway, captures independent private probabilities before participants see a market, withholds market outputs from operational decision owners until resolution, and compares the market aggregate with simple mean/median aggregation using proper probabilistic scores. The primary estimand is the paired difference in Brier score between market close and the independent-forecast mean over admissible resolved contracts, with dependence handled at the operational-cluster level. Feasibility, ambiguity, participant burden and experimental interference are first-class outcomes. The paper separates source-supported background from untested project hypotheses, identifies organizational and statistical threats, and outlines later extensions to human--machine ensembles and sequential evidence acquisition. No empirical superiority claim is made at protocol stage.
+\end{abstract}
+
+\section{Motivation}
+Complex engineering programmes rarely possess a single complete view of readiness. Integration engineers may know that an interface is fragile; test teams may see recurring failure modes; platform teams may know an environment is unrepresentative; product or functional actors may know that a scenario is unlikely to be exercised as assumed. Some of this knowledge is documented. Some is local, tacit, recent or weakly structured.
+
+Prediction markets are one family of mechanisms designed to elicit and aggregate dispersed probability judgments. Field and corporate studies provide precedent in sales forecasting, technology companies and other organizations \citep{chenplott2002,cowgill2009,cowgill2015}, while product-oriented studies have extended the idea to new-product outcomes \citep{matzler2013}. These results justify a question, not a transfer claim: an engineering organization has different incentives, dependencies, event semantics and evidence systems.
+
+This work therefore asks a bounded question:
+
+\begin{quote}
+Can distributed engineering knowledge be transformed into a calibrated, auditable and incrementally useful probabilistic signal without interfering with the engineering process being observed?
+\end{quote}
+
+The emphasis on \emph{without interfering} is deliberate. If a forecast changes the release decision, test campaign or staffing that determines the outcome, the study no longer observes the same process it set out to forecast.
+
+\section{Prediction is evidence, not authority}
+The framework enforces the separation
+\[
+  p(Y\mid E) \neq \text{engineering decision}.
+\]
+A forecast is one piece of evidence about uncertainty. Accountable governance remains responsible for actions, constraints, risk acceptance and residual uncertainty. Study~0 does not allow its market output to become a release gate or automated go/no-go rule.
+
+This boundary is also methodological. Decision markets introduce additional incentive and observability problems when forecasts are conditioned on actions that the forecasts then help choose \citep{wang2023}. The first study avoids that entanglement.
+
+\section{Related work and what it does not establish}
+\subsection{Information aggregation mechanisms}
+Chen and Plott report a market-based information aggregation mechanism deployed at Hewlett-Packard for sales forecasting \citep{chenplott2002}. Cowgill and Zitzewitz analyze corporate markets at Google, Ford and another firm, reporting relative efficiency under thin participation and improvements over expert forecasts in those settings, alongside optimism bias at Google \citep{cowgill2015}. Earlier Google work also used market data to investigate information flows and correlated trading \citep{cowgill2009}.
+
+These studies support feasibility and identify relevant failure modes. They do not establish that an internal market will improve software/system engineering forecasts. The present study therefore treats market superiority as an empirical hypothesis.
+
+\subsection{Markets are not the only crowd aggregator}
+A crucial baseline is simple or enhanced polling. Atanasov et al. compare prediction markets with prediction polls and show that carefully aggregated polls can be highly competitive, making ''market vs. nothing'' an inadequate design \citep{atanasov2017}. Study~0 therefore captures independent probabilities before market exposure and preserves mean/median aggregation as first-class baselines.
+
+\subsection{Proper scoring}
+Probabilistic predictions should be evaluated as probabilities. The Brier score originates in probabilistic forecast verification \citep{brier1950}. More generally, strictly proper scoring rules are designed so that a forecaster optimizes expected score by reporting the predictive distribution believed to be correct under the scoring model \citep{gneiting2007}. Propriety is an evaluation/incentive property; it is not the same thing as empirical calibration.
+
+\subsection{Market mechanisms}
+Market scoring rules combine sequential probability elicitation with group aggregation. Hanson develops logarithmic market scoring rules and their conditional/combinatorial properties \citep{hanson2007}. Study~0 is platform-neutral: LMSR is a candidate mechanism, not a required scientific truth.
+
+\subsection{Information structure and hidden profiles}
+Corporate markets can overweight public information under modeled conditions and can be affected by social structure \citep{qiu2017}. This motivates two design choices: capture private forecasts before market exposure, and record coarse information-locality metadata without requiring participants to disclose confidential content.
+
+\subsection{Human--machine ensembles}
+Human and computational forecasts can be complementary when they exploit different signals and their errors are not perfectly aligned \citep{hong2021}. This provides a later research direction. It does not justify constructing a bespoke machine-learning model solely to manufacture a human-vs-AI comparison in Study~0.
+
+\section{The Forecast Contract}
+A prediction is auditable only if the future event can be resolved without rewriting its meaning after the outcome is known. We therefore introduce the local project object
+\[
+\mathcal F_j=(Q_j,\Omega_j,T^o_j,T^c_j,T^r_j,R_j,E_j,A_j,C_j,X_j,S_j),
+\]
+where:
+\begin{itemize}[leftmargin=*]
+  \item $Q_j$ is the human-readable question;
+  \item $\Omega_j$ is the outcome space (binary in Study~0);
+  \item $T^o_j,T^c_j,T^r_j$ are open, close and latest-resolution times;
+  \item $R_j$ is the frozen resolution rule;
+  \item $E_j$ names the authoritative evidence;
+  \item $A_j$ names the resolver authority/role;
+  \item $C_j$ records shared context made available to participants;
+  \item $X_j$ records exclusions and ambiguity conditions;
+  \item $S_j$ records safeguards such as shadow mode and prohibition of HR use.
+\end{itemize}
+
+''Forecast Contract'' is project terminology. It should not be mistaken for an established external standard. Its function is analogous to a measurement contract: define the target before observing the answer.
