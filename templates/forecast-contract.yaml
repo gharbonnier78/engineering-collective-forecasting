@@ -1,0 +1,30 @@
+id: FC-EXAMPLE-001
+version: "0.1"
+status: draft
+question: "Will the already-scheduled qualification activity satisfy the frozen binary criterion before the declared close date?"
+cluster_id: "EXAMPLE-EPISODE-01"
+outcome:
+  type: binary
+  labels:
+    true: "criterion satisfied"
+    false: "criterion not satisfied"
+timing:
+  opens_at: "2026-10-01T08:00:00Z"
+  closes_at: "2026-10-05T16:00:00Z"
+  resolves_no_later_than: "2026-10-10T16:00:00Z"
+resolution:
+  rule: "Resolve TRUE only if the frozen authoritative report records the criterion as satisfied before the declared deadline; otherwise resolve FALSE unless a void rule applies."
+  authoritative_evidence: "approved qualification report or immutable evidence record"
+  resolver_role: "independent evidence resolver"
+  ambiguity_rule: "If the source is missing, contradictory, or requires post-hoc reinterpretation of the criterion, mark the contract VOID rather than changing the question."
+context:
+  shared_information:
+    - "Only information already approved for participating roles."
+  exclusions:
+    - "No confidential implementation details are copied into the public protocol."
+safeguards:
+  shadow_mode: true
+  visible_to_decision_owner_before_resolution: false
+  individual_hr_use: false
+  real_money: false
+freeze: null
