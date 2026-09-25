@@ -1,0 +1,82 @@
+schema_version: "0.1"
+
+harness:
+  repository: gharbonnier78/scientific-research-harness
+  ref: "e8e043c2b66a74ccacd023d67a32f989885449eb"
+  entrypoint: HARNESS.md
+  status: "immutable reviewed main commit"
+  upgrade_rule: "Upgrade only through an explicit change that records whether scientific meaning, execution semantics, or pedagogy is affected. Never follow main silently."
+
+consumer:
+  repository: "gharbonnier78/engineering-collective-forecasting"
+  project_id: "engineering-collective-forecasting"
+  instruction_entrypoints:
+    - AGENTS.md
+
+authority:
+  sources:
+    - id: "source-notes"
+      reference: "research/sources/"
+      role: "Reviewed notes describing what each external source supports and does not support."
+    - id: "study0-preregistration"
+      reference: "studies/study-0-shadow-forecasting/preregistration.md"
+      role: "Prospective authority for Study 0 estimands, comparisons, exclusions, stopping and analysis once frozen before outcome inspection."
+    - id: "forecast-contracts"
+      reference: "schemas/forecast-contract.schema.json"
+      role: "Local schema for prospective forecast questions and their resolution evidence."
+  domain_experts: []
+  prohibited_substitution:
+    - "The harness, market platform, LLM, Diderot, and forecasting mechanism do not replace authoritative engineering evidence or accountable decision ownership."
+
+artifacts:
+  claims:
+    - research/claims.yaml
+    - paper/engineering_collective_forecasting.tex
+  evidence:
+    - studies/study-0-shadow-forecasting/evidence/README.md
+  scientific_gates:
+    - research/gates.yaml
+  chronicle:
+    - research/chronicle/
+  pedagogy:
+    - docs/pedagogy.md
+    - research/sources/
+  handoff: "research/chronicle/2026-09-25--bootstrap.md"
+
+execution:
+  engineering:
+    care_profile: "POC"
+    rationale: "The repository contains executable validation and reference analysis code but no deployed service. The POC profile is sufficient while scientific protocols remain pre-launch; escalation is required before hosting participant data or operating a live market service."
+    required_checks:
+      - "python scripts/validate_repo.py"
+      - "python -m unittest discover -s tests -v"
+      - "latexmk -pdf -interaction=nonstopmode -halt-on-error paper/engineering_collective_forecasting.tex"
+    deferred_controls:
+      - control: "Production threat model and live identity/data controls"
+        risk: "Needed only if this repository evolves into a deployed participant-facing system."
+        escalation_trigger: "Any live forecasting service, SSO integration, employee data ingestion, or automated connection to internal engineering systems."
+        next_action: "Upgrade care profile and create a deployment-specific threat model before exposure."
+  environment_lock: "requirements.txt + GitHub Actions workflow versions; LaTeX package set documented in paper/README.md"
+  replay_commands:
+    - "python scripts/validate_repo.py"
+    - "python -m unittest discover -s tests -v"
+    - "make paper"
+  randomness:
+    status: "declared"
+    root_entropy_policy: "Study 0 reference bootstrap uses the frozen integer seed declared in preregistration.md; random resampling is event/cluster level, never trade level."
+    lineage_artifact: "studies/study-0-shadow-forecasting/preregistration.md"
+  concurrency:
+    status: "not_applicable"
+    reference_path: null
+    equivalence_evidence: null
+
+local_extensions:
+  - "Forecast Contract as a local evidence-resolution object."
+  - "Shadow-mode interference classification and non-interference safeguard."
+
+deviations: []
+
+adoption:
+  adopted_at: "2026-09-25"
+  adopted_by: "ChatGPT with explicit user authorization"
+  notes: "Bootstrap of an independent research programme. Domain-specific content stays local; reusable methodological improvements discovered here should be proposed upstream to the harness after evidence and independent review."
