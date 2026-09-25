@@ -1,0 +1,47 @@
+schema_version: "0.1"
+project_status: "protocol_design"
+claims:
+  - id: ECF-C0
+    title: "Shadow forecasting feasibility"
+    status: "PROPOSED_NOT_TESTED"
+    statement: "A bounded shadow forecasting protocol can be operated with low burden, objective resolution, and no material interference with the observed engineering process."
+    evidence_required:
+      - "prospectively registered forecast contracts"
+      - "participation burden measurements"
+      - "resolution/adjudication records"
+      - "interference records"
+    prohibited_inference: "Feasibility does not imply forecasting accuracy or decision value."
+  - id: ECF-C1
+    title: "Probabilistic forecast validity"
+    status: "PROPOSED_NOT_TESTED"
+    statement: "Collective forecasts can be evaluated as probabilistic forecasts using proper scoring and calibration diagnostics."
+    evidence_required:
+      - "resolved outcomes"
+      - "frozen forecasts before outcome observation"
+      - "Brier scores and calibration diagnostics"
+    prohibited_inference: "Descriptive calibration on a small Study 0 sample is not a universal calibration guarantee."
+  - id: ECF-C2
+    title: "Incremental aggregation value"
+    status: "PROPOSED_NOT_TESTED"
+    statement: "The prediction-market aggregate may contain incremental predictive information beyond simple aggregation of independent forecasts."
+    primary_estimand: "mean_j[BS_market,j - BS_mean,j] over admissible resolved Forecast Contracts"
+    evidence_required:
+      - "paired event-level scores"
+      - "predefined baselines"
+      - "event/cluster-level uncertainty analysis"
+    prohibited_inference: "A negative point estimate alone is not proof of superiority, especially in a small feasibility study."
+  - id: ECF-C3
+    title: "Distributed-information condition"
+    status: "EXPLORATORY_NOT_TESTED"
+    statement: "Any market aggregation gain may depend on information diversity, participant-role diversity, or initial belief dispersion."
+    evidence_required:
+      - "pre-market independent forecasts"
+      - "role categories"
+      - "information-visibility categories"
+      - "resolved outcomes"
+    prohibited_inference: "Association between diversity and score gain is not a causal effect of diversity."
+  - id: ECF-C4
+    title: "Human-machine complementarity"
+    status: "FUTURE_NOT_STUDY0_PRIMARY"
+    statement: "Human collective forecasts and structured probabilistic models may have complementary errors that can be combined in later studies."
+    prohibited_inference: "Study 0 does not require or establish a human-machine ensemble advantage."
