@@ -6,8 +6,8 @@ cluster_id: "EXAMPLE-EPISODE-01"
 outcome:
   type: binary
   labels:
-    true: "criterion satisfied"
-    false: "criterion not satisfied"
+    "true": "criterion satisfied"
+    "false": "criterion not satisfied"
 timing:
   elicitation_opens_at: "2026-10-01T08:00:00Z"
   private_forecasts_close_at: "2026-10-01T12:00:00Z"
