@@ -1,47 +1,62 @@
-schema_version: "0.1"
-project_status: "protocol_design"
+schema_version: "0.2"
+project_status: "protocol_redesign_after_partial_accept"
 claims:
-  - id: ECF-C0
-    title: "Shadow forecasting feasibility"
+  - id: ECF-C0A
+    title: "Forecast Contract funnel feasibility"
     status: "PROPOSED_NOT_TESTED"
-    statement: "A bounded shadow forecasting protocol can be operated with low burden, objective resolution, and no material interference with the observed engineering process."
+    statement: "A meaningful fraction of prospectively identified engineering events can be converted into important, uncertain, objectively resolvable, non-interfering and confidentiality-safe Forecast Contracts that later resolve cleanly."
     evidence_required:
-      - "prospectively registered forecast contracts"
-      - "participation burden measurements"
-      - "resolution/adjudication records"
-      - "interference records"
-    prohibited_inference: "Feasibility does not imply forecasting accuracy or decision value."
+      - "prospective contract-funnel register"
+      - "admissibility reasons for every candidate"
+      - "resolution outcome for every frozen dry-run contract"
+    prohibited_inference: "A successful contract funnel does not establish forecast skill."
+
+  - id: ECF-C0B
+    title: "Private shadow forecasting feasibility"
+    status: "PROPOSED_NOT_TESTED"
+    statement: "Private forecasts, institutional references and outcomes can be collected at a common freeze time with acceptable burden and without detected material interference."
+    evidence_required:
+      - "same-time owner and participant forecasts"
+      - "base-rate and official-status records"
+      - "burden, abstention and interference records"
+    prohibited_inference: "Absence of detected interference is not proof that elicitation had zero behavioral effect."
+
   - id: ECF-C1
-    title: "Probabilistic forecast validity"
+    title: "Incremental private collective signal"
     status: "PROPOSED_NOT_TESTED"
-    statement: "Collective forecasts can be evaluated as probabilistic forecasts using proper scoring and calibration diagnostics."
+    statement: "A prospectively fixed private collective forecast may contain incremental predictive information beyond the accountable owner's private probability and the historical base rate."
+    primary_estimand: "mean_j[BS(crowd_primary,j)-BS(owner,j)] over the prospectively defined target population of admissible resolved contracts"
+    required_reference_estimand: "mean_j[BS(crowd_primary,j)-BS(base_rate,j)]"
     evidence_required:
+      - "owner, base-rate and crowd forecasts frozen at the same information time"
       - "resolved outcomes"
-      - "frozen forecasts before outcome observation"
-      - "Brier scores and calibration diagnostics"
-    prohibited_inference: "Descriptive calibration on a small Study 0 sample is not a universal calibration guarantee."
+      - "cluster-level uncertainty analysis"
+      - "actor/observer stratification"
+    prohibited_inference: "A point estimate below zero is not by itself proof of general superiority or operational decision value."
+
   - id: ECF-C2
-    title: "Incremental aggregation value"
-    status: "PROPOSED_NOT_TESTED"
-    statement: "The prediction-market aggregate may contain incremental predictive information beyond simple aggregation of independent forecasts."
-    primary_estimand: "mean_j[BS_market,j - BS_mean,j] over admissible resolved Forecast Contracts"
-    evidence_required:
-      - "paired event-level scores"
-      - "predefined baselines"
-      - "event/cluster-level uncertainty analysis"
-    prohibited_inference: "A negative point estimate alone is not proof of superiority, especially in a small feasibility study."
-  - id: ECF-C3
-    title: "Distributed-information condition"
+    title: "Private aggregation mechanism"
     status: "EXPLORATORY_NOT_TESTED"
-    statement: "Any market aggregation gain may depend on information diversity, participant-role diversity, or initial belief dispersion."
+    statement: "Prospectively fixed recalibration using meta-predictions may improve a private poll relative to raw mean or median without exposing a social aggregate."
     evidence_required:
-      - "pre-market independent forecasts"
-      - "role categories"
-      - "information-visibility categories"
-      - "resolved outcomes"
-    prohibited_inference: "Association between diversity and score gain is not a causal effect of diversity."
+      - "private own forecasts"
+      - "private meta-predictions"
+      - "fixed aggregation parameter before outcomes"
+    prohibited_inference: "Study 0 must not tune the recalibration parameter on its own outcomes."
+
+  - id: ECF-C3
+    title: "Actor-observer and information structure"
+    status: "EXPLORATORY_NOT_TESTED"
+    statement: "Forecast error and aggregation behavior may differ by ability to influence the outcome, information locality and shared-information structure."
+    prohibited_inference: "Observed actor/observer differences are associations, not causal effects of role."
+
   - id: ECF-C4
+    title: "Prediction-market residual value"
+    status: "FUTURE_NOT_STUDY0_PRIMARY"
+    statement: "A later intervention-aware or observers-only study may test whether a prediction market adds residual information beyond a qualified private-poll aggregator measured at the same information time."
+    prohibited_inference: "Study 0 provides no prediction-market superiority claim."
+
+  - id: ECF-C5
     title: "Human-machine complementarity"
     status: "FUTURE_NOT_STUDY0_PRIMARY"
-    statement: "Human collective forecasts and structured probabilistic models may have complementary errors that can be combined in later studies."
-    prohibited_inference: "Study 0 does not require or establish a human-machine ensemble advantage."
+    statement: "Later studies may compare private human collective forecasts with independently qualified structured probabilistic models."
