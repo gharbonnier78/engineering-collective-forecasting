@@ -18,7 +18,7 @@ Every candidate event encountered in the predefined event families is entered in
 - pre-existing authoritative evidence;
 - confidentiality/publication safety;
 - non-interference suitability;
-- event-family membership sufficient to define a base-rate rule.
+- event-family classification, including whether a defensible historical base-rate reference can be constructed.
 
 For candidates that pass, create and freeze a Forecast Contract before the event resolves. After the event, record whether it resolved cleanly, became ambiguous, lacked evidence, or violated the intended scope.
 
@@ -34,9 +34,24 @@ Report:
 
 Study 0A is the primary feasibility test. It makes no forecasting-skill claim.
 
+### Study 0A decision rule
+
+Before the intake window opens, freeze the feasibility gate and the values used to project Study 0B throughput. The protocol-candidate defaults are:
+
+- minimum candidate-to-admissible yield: `Y_min = 0.30`;
+- minimum admissible-to-cleanly-resolved rate: `R_clean_min = 0.80`;
+- Study 0B structural targets: `J_min = 30` admissible resolved contracts and `K_min = 8` independent clusters;
+- maximum projected calendar time to reach both `J_min` and `K_min`: `T_projected_max = 26 weeks`.
+
+A deployment may choose stricter or different values only **before Study 0A begins**, with the rationale recorded in the deployment-specific preregistration.
+
+At the end of Study 0A, compute the observed admissible yield, clean-resolution rate, and projected time to `J_min/K_min` from the prospective intake rate and cluster mix. Study 0B is eligible to proceed only if all frozen feasibility thresholds are met, the potential forecaster pool is compatible with the frozen actor/observer composition rule, and G1/G2/G3 permit it. Otherwise stop/redesign rather than relaxing thresholds after seeing outcomes.
+
+The funnel register must capture identification, drafting/freeze and resolution timestamps, drafting effort, candidate actor/observer pool counts, and a controlled rejection-reason code so these quantities can be computed without participant forecasting.
+
 ## 2. Study 0B — research questions
 
-Study 0B starts only if Study 0A and G1/G2/G3 permit it.
+Study 0B starts only if the frozen Study 0A decision rule passes and G1/G2/G3 permit it.
 
 **RQ1 — incremental private collective signal.** At a common frozen information time, does a prospectively specified private collective forecast add predictive information beyond the accountable owner's private probability?
 
@@ -68,7 +83,7 @@ A probability p_base derived from a prospectively specified historical reference
 - treatment of sparse history;
 - rule for freezing the computed base rate.
 
-If a defensible base rate cannot be constructed, the contract may remain informative for Study 0A but is not admissible for the confirmatory Study 0B comparison.
+If a defensible base rate cannot be constructed, record `base_rate_status = unavailable` and the reason. The contract **remains eligible for the primary crowd-vs-owner contrast** if all other admissibility criteria are met. The crowd-vs-base-rate contrast is computed only on the prospectively identified subset with a defensible base rate.
 
 ### R1 — institutional signal
 
@@ -81,6 +96,10 @@ Capture:
 The official status remains descriptive unless a numeric mapping was prospectively defined before outcomes.
 
 ### R2 — private collective signal
+
+An eligible forecaster must have legitimate, role-relevant knowledge of the event, the system/process producing it, or the authoritative evidence path. Eligibility must be established prospectively from role and scope; observer quotas cannot be filled with uninformed participants merely to satisfy composition counts.
+
+The accountable owner is always captured separately as R1. The owner may also submit an R2 private forecast only if independently eligible, but the **primary crowd aggregate excludes the owner** to keep the comparator distinct. A descriptive all-eligible-person aggregate including the owner is reported when the owner participates.
 
 Each participant supplies, privately:
 
@@ -123,11 +142,11 @@ Primary paired contrast:
 
 Delta_owner,j = BS(p_crowd,j,y_j) - BS(p_owner,j,y_j).
 
-Required reference contrast:
+Required reference contrast, on the subset with `base_rate_status = available`:
 
 Delta_base,j = BS(p_crowd,j,y_j) - BS(p_base,j,y_j).
 
-Report mean paired contrasts over the target population and cluster-bootstrap uncertainty.
+Report mean `Delta_owner` over all otherwise-admissible resolved contracts. Report mean `Delta_base` on the explicitly enumerated base-rate-available subset, with the subset size and event-family composition. Use cluster-bootstrap uncertainty for each applicable contrast.
 
 Negative values indicate lower observed loss for the crowd on the sampled target population. They do not by themselves establish general superiority or decision value.
 
@@ -142,13 +161,15 @@ Before Study 0B outcomes, the deployment-specific preregistration must freeze:
 - a practically tolerable non-inferiority margin delta_NI on the Brier-loss scale for crowd vs owner;
 - the rule for deciding whether Study 1 is justified.
 
-Recommended structural minimums are J_min >= 30 and K_min >= 8, but the non-inferiority margin is domain-specific and must not be invented after outcome inspection.
+The protocol-candidate structural defaults are `J_min = 30` and `K_min = 8`. The protocol-candidate non-inferiority margin is `delta_NI = 0.02` on the normalized Brier-loss scale, unless a deployment freezes a different value **before Study 0A begins** and documents its operating-characteristic rationale.
+
+At roughly 30 contracts this is a **screening/non-inferiority continuation gate, not a superiority test**. The independent design review's toy operating-characteristic study showed that a `delta_NI = 0.02` rule can reject a crowd that is clearly worse than the owner, but has only limited ability to distinguish near-equality from modest advantage at this scale. If a deployment needs reliable continuation under near-equality or evidence that the crowd is better, it must plan a larger `J` prospectively rather than widen `delta_NI` after outcomes.
 
 A generic continuation rule is:
 
 - feasibility thresholds met;
 - upper bound of the preregistered interval for mean Delta_owner does not exceed delta_NI;
-- mean Delta_base is not materially worse than zero under the separately frozen base-rate criterion;
+- on the base-rate-available subset, mean Delta_base is not materially worse than zero under the separately frozen base-rate criterion;
 - no unresolved organizational or confidentiality issue.
 
 Failing this rule means stop/redesign, not "negative proof" that distributed knowledge has no value.
@@ -165,7 +186,8 @@ If the deployment cannot sustain those quotas, specify a different fixed rule be
 
 Report:
 
-- all-participant aggregate;
+- primary crowd aggregate excluding the accountable owner;
+- descriptive all-eligible-person aggregate including the owner when the owner also submitted an R2 forecast;
 - actor-only aggregate;
 - observer-only aggregate.
 
@@ -233,12 +255,13 @@ Confirmatory/pre-specified:
 - mean Delta_owner;
 - mean Delta_base;
 - participation and composition admissibility;
-- burden and detected interference.
+- burden and detected interference, including detected interference counts/rates by owner, actor and observer role.
 
 Descriptive:
 
 - Brier loss by owner, base rate, primary crowd, mean and median;
 - official-status/outcome cross-tabulation;
+- a pre-specified "institutionally positive but privately doubtful" table: freeze the set of official status values counted as positive/green before collection, then report cases where `official_status` is in that set while the primary private-crowd probability is < 0.50, together with eventual outcomes;
 - calibration/reliability plots with counts and uncertainty;
 - sharpness;
 - actor-only and observer-only scores.
@@ -247,7 +270,7 @@ Exploratory:
 
 - meta-recalibration vs raw mean/median;
 - association with information locality, AI-assistance flag and belief dispersion;
-- "officially green at T_f but private crowd below 0.5" cases and their eventual outcomes.
+- alternative thresholds or status mappings beyond the frozen descriptive green/<0.50 table.
 
 ## 14. Randomness and uncertainty
 
