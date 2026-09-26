@@ -1,78 +1,191 @@
 # Study 0 analysis plan
 
-## Analysis unit
+## 1. Analysis unit and target population
 
-The unit of primary comparison is the **resolved Forecast Contract**. A market containing 100 trades still contributes one terminal probability to the primary paired comparison. If contracts are tightly coupled within an operational episode, define a `cluster_id` prospectively and resample/aggregate at the cluster level.
+The primary unit is the **resolved Forecast Contract**, not a participant response, timestamp, or trade.
 
-## Binary scoring
+The target population must be frozen prospectively as all admissible contracts encountered during the declared calendar window and event families. Each contract receives equal weight in the primary estimand unless the deployment-specific preregistration declares otherwise.
 
-For forecast probability p and outcome y in {0,1}:
+Contracts from the same release, campaign, environment episode or tightly coupled operational episode share a prospective cluster_id. Uncertainty is resampled by cluster.
 
-```text
-Brier(p,y) = (p-y)^2
-```
+## 2. Binary scoring convention
 
-Lower is better. The primary per-contract contrast is:
+For probability p in [0,1] and outcome y in {0,1}:
 
-```text
-delta_j = brier(market_close_j, y_j) - brier(independent_mean_j, y_j)
-```
+    BS(p,y) = (p-y)^2
 
-A negative `delta_j` means the market was closer to the realized binary outcome on that contract. The primary summary is the mean delta over admissible contracts, with uncertainty resampled by independent cluster.
+This repository uses the normalized one-component binary quadratic/Brier loss. For a two-category probability vector, the original Brier formulation sums both category errors and is twice this quantity. All code, tables and claims in this repository use the normalized convention above.
 
-## Why the Brier score
+Lower loss is better.
 
-The Brier score is a proper scoring rule for binary probabilistic forecasts and preserves information about confidence that accuracy-at-50%-threshold would discard. Proper scoring rules are used because the scientific object is a probability forecast, not a hard classifier.
+## 3. Institutional references
 
-## Calibration
+Every primary-analysis contract must contain, at the same freeze time:
 
-Calibration asks whether events forecast near p occur at approximately frequency p across a sufficiently large comparable set. Study 0 is expected to be small, so reliability diagrams are descriptive and must display counts/uncertainty. Do not treat an empty or tiny bin as evidence of miscalibration.
+- p_base: historical base-rate probability from the frozen reference class;
+- p_owner: accountable owner's private probability;
+- official_status: the status already used by the organization.
 
-## Sharpness
+Official status is not silently mapped to a probability unless such mapping was frozen before outcomes.
 
-Sharpness is the concentration or decisiveness of forecasts independent of outcomes. It is valuable only conditional on adequate calibration. Report the distribution of probabilities and distance from the empirical base rate; do not reward extremity by itself.
+## 4. Private collective forecasts
 
-## Belief dispersion
+For each eligible forecaster i:
 
-Independent probabilities are clipped to `[0.01,0.99]` before logit transformation:
+- p_i: own probability;
+- m_i: expected average probability from peers.
 
-```text
-D_belief,j = SD(logit(p_ij))
-```
+All values are private until outcome resolution.
 
-This captures disagreement on a scale where 0.9 vs 0.99 is not treated as the same absolute change as 0.5 vs 0.59. It is exploratory.
+Required simple aggregators:
 
-## Role diversity
+- arithmetic mean of p_i;
+- median of p_i.
 
-Let q_r be the fraction of participating forecasters in role category r. A normalized Shannon index may be reported:
+Primary protocol candidate:
 
-```text
-D_role = -sum_r q_r log(q_r) / log(R)
-```
+    L_i = logit(clip(p_i))
+    M_i = logit(clip(m_i))
+    L_bar = mean(L_i)
+    M_bar = mean(M_i)
+    p_meta = logistic(M_bar + a * (L_bar - M_bar))
 
-where R is the number of role categories represented in the eligible role taxonomy. This is a descriptive proxy, not direct measurement of cognitive diversity.
+with clip interval [0.01,0.99] and a = 2.0 fixed prospectively.
 
-## Information locality
+This implementation is inspired by meta-belief/shared-information aggregation literature. It is not asserted to be an exact implementation of any one published method.
 
-Report the fraction of valid independent forecasts marked `local_to_role` or `mixed`. Do not ask participants to disclose confidential information in order to prove locality.
+## 5. Primary paired contrasts
 
-## Market trajectory
+For each admissible contract j:
 
-Trajectory data are useful for describing belief updates and sudden movements. They are nested within a contract. Do not inflate sample size by treating every timestamp as an independent forecast event.
+    delta_owner_j = BS(p_meta_j,y_j) - BS(p_owner_j,y_j)
+    delta_base_j  = BS(p_meta_j,y_j) - BS(p_base_j,y_j)
 
-## Missingness and voids
+Primary summary:
 
-Retain every registered contract. Distinguish:
+    mean(delta_owner_j)
 
-- no participant forecast;
-- incomplete market phase;
+Required reference summary:
+
+    mean(delta_base_j)
+
+Negative values mean lower observed loss for the crowd aggregate on the sampled target population.
+
+The study does not infer operational decision value from these score differences.
+
+## 6. Cluster bootstrap
+
+Bootstrap independent cluster identifiers, not individual contracts when contracts are clustered.
+
+When a cluster is drawn, all contracts belonging to that cluster are included together. This preserves within-cluster dependence.
+
+The reference implementation:
+
+- rejects fewer than 2 clusters;
+- uses a frozen seed;
+- returns point estimate plus percentile interval;
+- never treats repeated forecasts from the same contract as independent.
+
+If there are fewer than 8 independent clusters, interval-based inference is labelled exploratory.
+
+## 7. Actor / observer factor
+
+ability_to_influence is mandatory:
+
+- none = observer;
+- indirect or direct = actor.
+
+Report the primary aggregator for:
+
+- all admissible participants;
+- actors only;
+- observers only.
+
+The participant-composition rule is prospectively frozen. A contract that does not meet the rule remains in funnel/feasibility reporting but is outside the primary forecast comparison.
+
+## 8. Belief dispersion
+
+For at least two private forecasts:
+
+    D_belief = SD(logit(clip(p_i)))
+
+For fewer than two forecasts, dispersion is undefined and the implementation raises rather than returning zero.
+
+## 9. Role diversity
+
+For role proportions q_r over a prospectively defined eligible taxonomy of R categories:
+
+    D_role = - sum_r q_r log(q_r) / log(R)
+
+The implementation requires eligible_role_count explicitly. It must not silently use only the categories observed in one contract.
+
+Role diversity is a descriptive proxy, not direct measurement of cognitive or information diversity.
+
+## 10. Brier diversity identity
+
+For the arithmetic mean p_bar:
+
+    BS(p_bar,y)
+      = mean_i BS(p_i,y)
+        - mean_i (p_i-p_bar)^2
+
+This exact identity explains one benefit of averaging: disagreement can cancel individual squared error. It does **not** imply that a simple mean fully pools independent evidence; probability averaging can remain conservative when forecasters each condition on only part of the available information.
+
+## 11. Calibration and sharpness
+
+Calibration diagnostics are descriptive at Study 0 scale. Reliability plots must show counts and uncertainty.
+
+Sharpness is interpreted only alongside calibration. Greater extremity alone is not evidence of better forecasting.
+
+## 12. Base-rate skill
+
+A descriptive skill score may be reported:
+
+    Skill_base = 1 - mean(BS_crowd) / mean(BS_base)
+
+only when the base-rate construction was frozen and the denominator is non-zero.
+
+The paired delta_base remains the primary reference because it preserves event-level pairing.
+
+## 13. Interference
+
+Primary analysis is intention-to-observe: otherwise resolvable contracts remain included regardless of I=0/1/2.
+
+Sensitivity analysis excludes detected I=2 contracts.
+
+The interference assessor and assessment timing must be frozen before outcomes. The assessor should not see forecast accuracy when feasible.
+
+## 14. Missingness and voids
+
+Retain every registered candidate and contract. Distinguish:
+
+- failed funnel criterion;
+- insufficient participant composition;
+- owner forecast missing;
+- base rate unavailable;
+- outcome already known to a participant;
 - missing authoritative evidence;
 - ambiguous resolution;
-- interference;
-- technical platform failure.
+- technical collection failure.
 
-Voids remain part of feasibility results even when excluded from predictive scoring.
+VOID status is limited to resolution ambiguity or missing evidence. Interference is not used as a post-treatment void rule.
 
-## Reference implementation
+## 15. Market analyses
 
-`analysis/reference_analysis.py` implements Brier scores, paired contrasts, logit belief dispersion, a simple normalized role-diversity index, and a cluster bootstrap using only the Python standard library.
+There is no market primary or secondary analysis in Study 0.
+
+A later prediction-market study must compare a market with a qualified private aggregator at the same information time, use an intervention-aware design or observers-only arm, and separately qualify thin-market/liquidity settings.
+
+## 16. Reference implementation
+
+analysis/reference_analysis.py implements:
+
+- normalized binary Brier loss;
+- simple private aggregation;
+- meta-belief recalibration;
+- belief dispersion;
+- role diversity with explicit eligible taxonomy size;
+- paired event contrasts;
+- cluster bootstrap with a minimum-cluster guard.
+
+Tests include a mutation-sensitive case that fails if cluster-level resampling is replaced by event-level resampling.
