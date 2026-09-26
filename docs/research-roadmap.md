@@ -1,38 +1,59 @@
 # Research roadmap
 
-## Study 0 - Shadow engineering forecasting
+## Study 0A — dry Forecast Contract funnel
 
-Goal: feasibility, probabilistic evaluation, market-vs-simple-aggregation comparison, and conditions of usefulness without operational influence.
+Before any participant study, run a 4–6 week dry intake on real planned engineering activities.
 
-## Study 1 - Replication and robustness
+Goal: estimate whether enough events are important, uncertain, objectively resolvable, non-interfering, confidentiality-safe and compatible with a defensible base-rate reference class.
 
-Possible extensions after Study 0 review:
+No forecasting platform and no participants are required.
 
-- replication across event families and teams;
-- actor vs informed-observer cohorts;
-- alternative aggregation mechanisms;
-- robustness to thin participation and market parameters;
-- prospective calibration/recalibration methods;
-- predeclared tests of information diversity hypotheses.
+## Study 0B — private collective forecasting
 
-## Study 2 - Human-machine forecasting
+If Study 0A supports continuation:
 
-Only when an independently qualified data/model forecast exists:
+- collect private participant probabilities and meta-predictions;
+- collect accountable-owner probability and official status at the same freeze time;
+- freeze a historical base-rate rule;
+- expose no aggregate before resolution;
+- estimate private-crowd skill against institutional and base-rate references;
+- stratify actors and observers.
 
-- compare structured model, human aggregate and market;
-- measure error correlation and incremental information;
-- test frozen combination rules on held-out contracts;
-- avoid training and evaluating a combiner on the same small event set.
+## Study 1 — replication and private aggregation
 
-## Study 3 - Decision value
+Replicate across event families and teams, and qualify alternative private aggregation mechanisms:
+
+- raw mean/median;
+- meta-belief/shared-prior recalibration;
+- fixed extremization variants;
+- expertise weighting only when independent history exists.
+
+No parameter should be trained and evaluated on the same small contract set.
+
+## Study 2 — prediction-market residual value
+
+Only after a private-poll baseline is qualified:
+
+- compare a market with the qualified private aggregator at the same information time;
+- use observers-only participants or an explicitly intervention-aware design;
+- qualify thin-market, liquidity and market-maker settings;
+- test whether the market adds residual predictive information rather than merely later information or recalibration.
+
+## Study 3 — decision value
 
 Only after forecasting validity is established:
 
-- expose selected forecasts under an approved intervention design;
-- measure whether they improve evidence acquisition or decision quality;
-- preserve accountable decision ownership;
-- explicitly model self-fulfilling effects and behavior changes.
+- expose selected forecast evidence under an approved intervention design;
+- measure evidence-acquisition or decision-quality effects;
+- model self-fulfilling behavior and policy feedback;
+- retain accountable human decision ownership.
 
-## Optional later link - sequential evidence acquisition
+G8 operational-use consideration points here, not to Study 1.
 
-A future sequential-decision framework could treat a collective forecast as one observation among tests, telemetry and expert evidence, or treat eliciting a new forecast as an information-acquisition action with cost and expected value of information. This is a possible bridge to ED/GO-ED-POMDP research, not a Study 0 assumption.
+## Later human-machine work
+
+When an independently qualified structured model exists, compare human private aggregates and model forecasts on held-out contracts and test combination rules prospectively.
+
+## Optional sequential evidence-acquisition bridge
+
+A future sequential-decision programme may treat a collective forecast as an observation or elicitation as an information-acquisition action with cost and expected value of information. This is a possible bridge to ED/GO-ED-POMDP, not a prerequisite for Study 0.
