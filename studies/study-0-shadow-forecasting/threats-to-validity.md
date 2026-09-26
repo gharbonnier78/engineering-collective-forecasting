@@ -2,43 +2,46 @@
 
 ## Construct validity
 
-- **Ambiguous success semantics:** vague questions make the market impossible to score objectively. Mitigation: Forecast Contract with frozen outcome and resolution rule.
-- **Market price != truth:** a price reflects the mechanism, participants, incentives and information; it is a forecast signal, not ground truth.
-- **Role diversity != information diversity:** category labels are proxies. Mitigation: record locality self-classification and preserve this limitation.
+- **Resolvable is not automatically useful.** A perfectly clear event can still be irrelevant to engineering decisions.
+- **Official status is not a probability.** It remains a descriptive institutional signal unless a mapping is frozen in advance.
+- **Role diversity is not information diversity.** Role labels are only a proxy.
+- **Meta-prediction is not direct access to shared information.** It is another judgment with its own noise and projection biases.
 
 ## Internal validity
 
-- **Interference/self-fulfilling effects:** seeing a forecast may change behavior. Mitigation: shadow outputs withheld from operational decision owners; `I=2` exclusion.
-- **Outcome knowledge:** insiders may already know the result. Mitigation: explicit abstention.
-- **Common-information anchoring:** participants may overweight widely shared information. Mitigation: independent pre-market forecast and exploratory locality analysis.
-- **Social/hierarchical pressure:** participants may shade estimates. Mitigation: pseudonymity, voluntary participation, no HR use.
-- **Question author leakage:** the question author may encode private expectations in wording. Mitigation: neutral templates and independent contract review.
-- **Resolution discretion:** post hoc interpretation can favor a method. Mitigation: predeclared resolver/evidence and void statuses.
+- **Reflection effect.** Even private elicitation can make actors reconsider their work. The protocol records detected interference and keeps an intention-to-observe primary analysis.
+- **Actor/observer bias.** People forecasting outcomes they can influence may systematically differ from observers. ability_to_influence is a design factor and results are stratified.
+- **Outcome knowledge.** Participants who already know the answer abstain.
+- **Shared AI assistance.** Multiple forecasters consulting the same assistant can create hidden dependence. AI consultation is recorded.
+- **Common-information correlation.** Private forecasts may share the same public/status information. Meta-predictions and information-locality metadata help characterize, not eliminate, this dependence.
+- **Question-author leakage.** Neutral templates and independent contract review reduce expectation leakage.
+- **Resolution discretion.** Frozen authoritative evidence and resolver roles limit post-hoc reinterpretation.
 
 ## Statistical validity
 
-- **Small J:** Study 0 is a feasibility/estimation study; confidence intervals will be wide.
-- **Pseudo-replication:** trades/timestamps are not independent events. Mitigation: contract/cluster as unit.
-- **Related contracts:** multiple outcomes can share the same campaign/release. Mitigation: `cluster_id` and cluster bootstrap.
-- **Rare outcomes:** few positive or negative events impair calibration/discrimination estimates. Mitigation: report counts and avoid overclaiming.
-- **Post-selection:** selecting only interesting contracts after outcomes biases results. Mitigation: prospective register and retained voids.
-- **Multiple exploratory analyses:** diversity/role/trajectory findings are exploratory unless separately preregistered.
+- **Small number of contracts/clusters.** Study 0 is primarily estimation and feasibility; null results can be uninformative.
+- **Pseudo-replication.** Participants and repeated observations are nested within contracts; contracts can be nested within operational clusters.
+- **Changing participant composition.** Actor/observer quotas and required stratified reporting limit composition drift.
+- **Sparse event families.** A base rate is admissible only when its reference-class rule is prospectively defensible.
+- **Post-selection.** The dry funnel keeps rejected and void candidates visible.
+- **Parameter tuning.** Meta-recalibration constants are frozen before outcomes and are not optimized on Study 0.
+- **Multiple exploratory analyses.** Diversity, AI-use, role and aggregation-mechanism analyses are labelled exploratory.
 
 ## External validity
 
-- Corporate prediction-market results from Google, Ford, HP or consumer communities do not automatically transfer to complex engineering qualification.
-- One program, country, product family, team structure or platform may not generalize to another.
-- A virtual-points mechanism may behave differently from financially incentivized markets.
+- Results from one organization, program, event family or calendar period need replication.
+- Corporate prediction-market evidence does not transfer automatically to private engineering polls or vice versa.
+- Historical base rates may drift across product generations or operational regimes.
 
-## Platform validity
+## Causal validity
 
-- Market-maker parameters influence price dynamics.
-- Thin participation can make prices path dependent.
-- Hidden platform updates can break reproducibility.
-- AI/news assistance can contaminate the intended human-information signal.
+Study 0 estimates forecast performance, not causal effects. Neither p(Y|A) nor a difference in Brier scores identifies what would happen under an intervention do(A).
 
-Mitigation: freeze/export platform algorithm, version, parameters, visibility, and assistance settings.
+## Later market-study validity
 
-## Causal boundary
+Prediction markets are postponed because aggregate exposure can change the behavior of actors whose outcomes are being forecast. A future market study must:
 
-A conditional market forecast `P(Y | action=A)` is not automatically the interventional causal quantity `P(Y | do(A))`. Study 0 therefore avoids using conditional markets to claim treatment effects or recommend actions.
+- compare methods at the same information time;
+- use observers-only participants or an intervention-aware design;
+- qualify liquidity/market-maker settings;
+- preserve a private-poll baseline.
