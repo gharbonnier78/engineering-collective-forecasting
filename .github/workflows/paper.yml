@@ -10,18 +10,41 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - name: Install TeX
         run: |
           sudo apt-get update
           sudo apt-get install -y latexmk texlive-latex-base texlive-latex-extra texlive-pictures texlive-bibtex-extra
-      - name: Build PDF
-        working-directory: paper
-        run: latexmk -pdf -interaction=nonstopmode -halt-on-error engineering_collective_forecasting.tex
-      - name: Upload PDF
+      - name: Record environment
+        run: |
+          {
+            echo "runner=ubuntu-24.04"
+            echo "head_sha=${GITHUB_SHA}"
+            echo "source_date_epoch=$(git show -s --format=%ct HEAD)"
+            pdflatex --version
+            latexmk -v
+          } > paper-build-environment.txt
+      - name: Build first copy
+        run: bash scripts/build_paper.sh
+      - name: Preserve first copy
+        run: cp paper/engineering_collective_forecasting.pdf /tmp/ecf-paper-first.pdf
+      - name: Clean and rebuild
+        run: |
+          make clean
+          bash scripts/build_paper.sh
+      - name: Verify same-head deterministic bytes
+        run: |
+          cmp /tmp/ecf-paper-first.pdf paper/engineering_collective_forecasting.pdf
+          sha256sum paper/engineering_collective_forecasting.pdf | tee paper-sha256.txt
+      - name: Upload PDF and build record
         uses: actions/upload-artifact@v4
         with:
           name: engineering-collective-forecasting-paper
-          path: paper/engineering_collective_forecasting.pdf
+          path: |
+            paper/engineering_collective_forecasting.pdf
+            paper-build-environment.txt
+            paper-sha256.txt
