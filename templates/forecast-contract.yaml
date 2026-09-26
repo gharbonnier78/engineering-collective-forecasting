@@ -1,7 +1,7 @@
 id: FC-EXAMPLE-001
-version: "0.1"
+version: "0.2"
 status: draft
-question: "Will the already-scheduled qualification activity satisfy the frozen binary criterion before the declared close date?"
+question: "Will the already-scheduled qualification activity satisfy the frozen binary criterion before the declared resolution deadline?"
 cluster_id: "EXAMPLE-EPISODE-01"
 outcome:
   type: binary
@@ -9,14 +9,19 @@ outcome:
     true: "criterion satisfied"
     false: "criterion not satisfied"
 timing:
-  opens_at: "2026-10-01T08:00:00Z"
-  closes_at: "2026-10-05T16:00:00Z"
+  elicitation_opens_at: "2026-10-01T08:00:00Z"
+  private_forecasts_close_at: "2026-10-01T12:00:00Z"
   resolves_no_later_than: "2026-10-10T16:00:00Z"
 resolution:
-  rule: "Resolve TRUE only if the frozen authoritative report records the criterion as satisfied before the declared deadline; otherwise resolve FALSE unless a void rule applies."
+  rule: "Resolve TRUE only if the frozen authoritative evidence records the criterion as satisfied before the declared deadline; otherwise resolve FALSE unless a void rule applies."
   authoritative_evidence: "approved qualification report or immutable evidence record"
   resolver_role: "independent evidence resolver"
   ambiguity_rule: "If the source is missing, contradictory, or requires post-hoc reinterpretation of the criterion, mark the contract VOID rather than changing the question."
+institutional_reference:
+  base_rate_reference_class: "same prospectively defined event family"
+  base_rate_source: "approved historical event register"
+  accountable_owner_role: "accountable engineering owner"
+  official_status_source: "existing readiness/status record at freeze time"
 context:
   shared_information:
     - "Only information already approved for participating roles."
@@ -24,7 +29,11 @@ context:
     - "No confidential implementation details are copied into the public protocol."
 safeguards:
   shadow_mode: true
-  visible_to_decision_owner_before_resolution: false
+  aggregate_visible_to_participants_before_resolution: false
+  aggregate_visible_to_decision_owner_before_resolution: false
+  aggregate_visible_to_study_decision_scope_before_resolution: false
   individual_hr_use: false
+  individual_track_record_hr_use: false
   real_money: false
+  data_custodian_role: "independent research data custodian"
 freeze: null
