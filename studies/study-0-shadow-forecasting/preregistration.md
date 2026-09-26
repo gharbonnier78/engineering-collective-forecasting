@@ -186,11 +186,15 @@ An independent data custodian stores forecasts until resolution. A principal inv
 
 Longitudinal individual track records, if retained for research, are covered by the no-HR-use rule.
 
-## 10. AI-assistance metadata
+## 10. AI-assistance metadata and compliance boundary
 
-Private does not necessarily mean independent. Forecasters may consult the same AI assistant or shared source.
+Private does not necessarily mean independent. Forecasters may consult the same AI assistant or shared source, so AI use is part of the information structure and must be observable without turning the assistant into an authority.
 
-Record ai_assistant_consulted as yes/no and, if organizationally permissible, an approved coarse assistance category. Do not collect prompts or confidential transcripts in the public research dataset.
+Record `ai_assistant_consulted` as yes/no and, if organizationally permissible, an approved coarse assistance category. A deployment may additionally freeze provider/tool/model-family metadata when this can be collected without creating confidentiality or re-identification risk. Do not collect prompts, assistant transcripts, secrets, personal data, or confidential engineering evidence in the public research dataset.
+
+Participants may use only organization-approved AI-assistant paths. Assistant output is advisory: the participant owns the submitted probability, and authoritative resolution evidence remains the source named in the Forecast Contract.
+
+The deployment-specific authorization must include an AI-literacy/use briefing proportionate to the tools and context, consistent with the EU AI Act's Article 4 duty for providers/deployers to take measures for sufficient AI literacy. Article 50 transparency duties for certain interactive and generative systems apply from 2 August 2026. Ordinary assistant consultation is not classified by this protocol as high-risk by default; any later use of AI or forecast records for employee monitoring, performance evaluation, task allocation based on individual characteristics, promotion, termination or similar employment decisions requires a separate legal classification and is outside Study 0.
 
 AI use is descriptive in Study 0 unless separately preregistered.
 
