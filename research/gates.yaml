@@ -1,38 +1,47 @@
-schema_version: "0.1"
+schema_version: "0.2"
 gates:
   - id: G0
     name: Harness binding
     status: PASS
-    criterion: "Immutable harness ref, local manifest, AGENTS instructions, Chronicle startup record and source/claim boundaries exist."
+    criterion: "Immutable harness ref, local manifest, agent instructions, Chronicle and source/claim boundaries exist."
+
   - id: G1
     name: Protocol review
-    status: PENDING_INDEPENDENT_REVIEW
-    criterion: "Study 0 protocol, preregistration, contract schema, safeguards and analysis plan receive independent review."
+    status: PENDING_REREVIEW
+    criterion: "The redesigned minimum-sufficient Study 0A/0B protocol, schema, safeguards, analysis and paper receive independent exact-head review."
+    history: "Bootstrap head c8a3516 received PARTIAL ACCEPT on 2026-09-26; G1 was not released."
+
   - id: G2
     name: Organizational authorization
     status: NOT_STARTED
-    criterion: "Any internal shadow pilot has explicit authorization for scope, participant treatment, confidentiality, and non-interference."
+    criterion: "Any Study 0B private pilot has explicit authorization for employee participation, data custody, confidentiality, non-HR use and non-interference."
+
   - id: G3
     name: Prospective freeze
     status: NOT_STARTED
-    criterion: "Study-specific preregistration and initial contracts are frozen before outcomes or market trajectories are inspected."
+    criterion: "Deployment-specific target population, base-rate rule, owner/official references, aggregation constants, admissibility thresholds, stopping rule and initial contracts are frozen before outcome inspection."
+
   - id: G4
-    name: Pilot execution
+    name: Study 0 execution
     status: NOT_STARTED
-    criterion: "Forecasting is executed under the frozen protocol with recoverable timestamps, configuration and evidence."
+    criterion: "Study 0A dry funnel and, only if admissible, Study 0B private elicitation execute under the frozen protocol."
+
   - id: G5
     name: Outcome resolution
     status: NOT_STARTED
-    criterion: "Contracts are resolved from the predeclared authoritative evidence with ambiguity/adjudication retained."
+    criterion: "Contracts resolve from predeclared authoritative evidence; ambiguity and missing evidence remain visible."
+
   - id: G6
     name: Analysis replay
     status: NOT_STARTED
-    criterion: "Primary analysis replays from frozen data using the declared seed and event/cluster unit."
+    criterion: "Analysis replays from frozen data using the declared contract/cluster unit and exact aggregation constants."
+
   - id: G7
     name: Scientific review
     status: NOT_STARTED
     criterion: "Results and bounded claims receive independent evidence-based review."
+
   - id: G8
     name: Operational-use consideration
     status: BLOCKED_BY_DESIGN
-    criterion: "No forecast is allowed to influence release/governance decisions until earlier evidence supports a separately reviewed Study 1 protocol."
+    criterion: "No forecast evidence is exposed for real engineering decisions until a separately reviewed intervention/decision-value protocol (currently Study 3) is authorized."
