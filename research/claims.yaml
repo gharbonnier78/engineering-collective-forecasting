@@ -26,9 +26,10 @@ claims:
     status: "PROPOSED_NOT_TESTED"
     statement: "A prospectively fixed private collective forecast may contain incremental predictive information beyond the accountable owner's private probability and the historical base rate."
     primary_estimand: "mean_j[BS(crowd_primary,j)-BS(owner,j)] over the prospectively defined target population of admissible resolved contracts"
-    required_reference_estimand: "mean_j[BS(crowd_primary,j)-BS(base_rate,j)]"
+    required_reference_estimand: "mean_j[BS(crowd_primary,j)-BS(base_rate,j)] over the prospectively identified subset with a defensible base rate"
     evidence_required:
-      - "owner, base-rate and crowd forecasts frozen at the same information time"
+      - "owner and crowd forecasts frozen at the same information time for every primary contract"
+      - "base-rate forecast frozen at the same information time where a defensible reference class exists"
       - "resolved outcomes"
       - "cluster-level uncertainty analysis"
       - "actor/observer stratification"
