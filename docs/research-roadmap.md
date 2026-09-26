@@ -41,6 +41,8 @@ Only after a private-poll baseline is qualified:
 
 ## Study 3 — decision value
 
+Study 3 depends on qualified private forecasting from Study 1, **not** on completing Study 2. Prediction-market evaluation is therefore not on the critical path to operational-value research.
+
 Only after forecasting validity is established:
 
 - expose selected forecast evidence under an approved intervention design;
