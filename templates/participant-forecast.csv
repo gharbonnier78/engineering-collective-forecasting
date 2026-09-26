@@ -1,2 +1,2 @@
-contract_id,participant_pseudonym,forecasted_at,probability,role_category,information_visibility,ability_to_influence,outcome_already_known,evidence_that_would_change_estimate
-FC-EXAMPLE-001,P001,2026-10-01T09:00:00Z,0.62,integration,mixed,indirect,no,additional_test
+contract_id,participant_pseudonym,forecasted_at,probability,meta_predicted_peer_mean,role_category,information_visibility,ability_to_influence,outcome_already_known,ai_assistant_consulted,evidence_that_would_change_estimate
+FC-EXAMPLE-001,P001,2026-10-01T09:00:00Z,0.62,0.55,integration,mixed,indirect,no,no,additional_test
