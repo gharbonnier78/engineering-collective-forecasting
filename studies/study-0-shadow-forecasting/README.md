@@ -1,55 +1,73 @@
-# Study 0 - Shadow Engineering Forecasting
+# Study 0 — Shadow Engineering Forecasting
 
-Study 0 tests whether collective forecasting can be **measured** in a real engineering setting without becoming a new governance mechanism.
+Study 0 tests the **minimum sufficient mechanism** for turning distributed engineering knowledge into auditable probabilistic evidence without exposing a collective signal to the operational process.
+
+## Study 0A — dry contract funnel
+
+No participants and no platform.
+
+For 4–6 weeks, prospectively register candidate events from predefined engineering families and test whether each can become a Forecast Contract that is:
+
+- important;
+- uncertain at the intended freeze time;
+- objectively resolvable;
+- linked to authoritative evidence;
+- confidentiality-safe;
+- compatible with non-interfering observation;
+- attached to a defensible historical reference class.
+
+Freeze passing contracts and later record whether they resolve cleanly. The funnel itself is the primary feasibility study.
+
+## Study 0B — private forecasting
+
+Only if Study 0A and governance gates support continuation.
+
+At the same freeze time, collect privately:
+
+- historical base-rate probability;
+- accountable owner's probability;
+- existing official status;
+- each participant's own probability;
+- each participant's meta-prediction of the peer-average probability;
+- actor/observer, information-locality and AI-assistance metadata.
+
+No participant, decision owner, or study-team member with decision authority sees any collective aggregate before resolution.
 
 ## Primary question
 
-> Can distributed engineering knowledge be transformed into a calibrated and auditable probabilistic signal, and does a prediction-market aggregate add information beyond simple aggregation of independent forecasts?
-
-## Design principle
-
-Only forecast outcomes of activities already planned for operational reasons. Do not create tests, delay releases, alter staffing, or change gate decisions merely to make the experiment easier.
-
-## Population
-
-Eligible participants are adults with legitimate professional knowledge of the forecast topic. Participation is voluntary. The study should deliberately mix relevant perspectives (for example integration, development, test, architecture, environment/operations, functional/product, performance/security when relevant) rather than recruit only one hierarchy level.
-
-A participant must abstain if the outcome is already known to them at forecast time.
-
-## Sequence per contract
-
-1. freeze the Forecast Contract;
-2. collect a private independent probability from each participant;
-3. freeze those forecasts;
-4. open the market phase with virtual points or another approved non-cash mechanism;
-5. close before the outcome becomes trivially observable;
-6. let the pre-existing engineering process continue unchanged;
-7. resolve the event from the predeclared authoritative evidence;
-8. score methods and record ambiguity/interference.
+> Does a prospectively fixed private collective forecast contain incremental predictive information beyond the accountable owner's same-time probability, while also demonstrating skill relative to the historical base rate?
 
 ## Candidate event families
 
-Use generic categories such as:
+Examples remain deliberately generic:
 
-- contract/integration test passes before a fixed deadline;
-- already-scheduled qualification campaign finds at least one new confirmed critical defect;
-- first valid performance run satisfies a predeclared threshold;
-- environment reaches a predeclared representativity criterion by a date;
-- migration rehearsal completes inside a defined operational window;
-- release candidate completes an already-defined pipeline without unplanned manual intervention;
-- evidence package is complete against a frozen checklist by the gate date;
-- AI/tool pilot satisfies a frozen acceptance criterion on a frozen benchmark.
+- integration/contract criterion reached by a fixed deadline;
+- already-scheduled qualification campaign discovers a predefined class of defect;
+- first valid performance run satisfies a frozen threshold;
+- environment reaches a frozen representativity criterion;
+- migration rehearsal completes within a predefined window;
+- release candidate completes an existing pipeline without unplanned intervention;
+- evidence package is complete against a frozen checklist;
+- AI/tool pilot meets a frozen benchmark acceptance contract.
 
-Do **not** begin with subjective questions such as "Will the release be successful?" or evaluative questions about an employee, team, or supplier.
+Avoid vague "success" questions and evaluative questions about employees, teams or suppliers.
 
-## Minimal outputs
+## Minimum outputs
 
-- event/contract register;
-- independent forecast table;
-- market close probability and trajectory export;
-- resolution record;
-- interference record;
-- analysis dataset with pseudonymous participant identifiers;
-- bounded result report with negative/null results retained.
+Study 0A:
 
-See `preregistration.md`, `analysis-plan.md`, `organizational-safeguards.md` and `threats-to-validity.md`.
+- contract-funnel register;
+- frozen dry-run contracts;
+- resolution records;
+- funnel/rejection/void metrics.
+
+Study 0B:
+
+- same-time institutional reference record;
+- pseudonymous private forecast/meta-prediction table;
+- actor/observer composition;
+- resolution and interference records;
+- bounded probabilistic analysis;
+- negative/null results retained.
+
+Prediction markets are explicitly outside Study 0 and belong to a later residual-mechanism study.
