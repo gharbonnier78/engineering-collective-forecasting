@@ -1,53 +1,102 @@
 # Pedagogical map
 
-This project uses the pinned harness Pedagogical Concept Contract. The public paper is not enough by itself: difficult concepts should remain teachable, executable and connected to authoritative sources.
+This project applies the pinned harness Pedagogical Concept Contract. Scientific protocol and pedagogy are separate: a clear explanation is not evidence that a claim is true.
 
-## Concepts introduced or materially re-encountered
+## Prediction market
 
-### Prediction market
+**Intuition.** A market aggregates beliefs by letting participants move a shared price or probability.
 
-**Intuition.** A market is used as an information-aggregation mechanism: participants move a price when their own probability differs from the current collective probability.
+**Engineering boundary.** In this project a market is a later mechanism, not the Study 0 instrument. When participants can influence the forecast outcome, showing them the market state can itself be an intervention.
 
-**Concrete example.** If a binary contract pays one unit when a qualification criterion is met and the current market probability is 0.55, a participant who believes 0.75 has an incentive, under an appropriate mechanism, to move the market upward.
+**Misconception.** market probability = truth.  
+**Correction.** It is a mechanism-dependent aggregate conditioned on participants, information and incentives.
 
-**Mathematical anchor.** A market scoring rule can update a state-dependent score/cost as reports change. LMSR is one mechanism; the research question does not depend on LMSR being uniquely correct.
+**Understanding gate.** Explain why a market can aggregate information without neural-network training, and why visible prices can contaminate a shadow study.
 
-**Misconception.** `market probability = truth`. Correction: it is an aggregated forecast conditional on mechanism, participation, incentives and information.
+## Proper scoring rule
 
-**Understanding gate.** Explain why a market can aggregate information without training neural-network weights, and name at least two reasons the market probability can be biased.
+**Intuition.** A probability score should make honest probability reporting optimal in expectation under its assumptions.
 
-### Proper scoring rule
+**Mathematical descent.** If a forecaster's true belief is q=0.7 and the reported probability is p, normalized binary Brier loss has expected value
 
-**Intuition.** A scoring rule evaluates a probability in a way designed not to reward strategic misreporting of belief in expectation.
+    E[BS] = 0.7(1-p)^2 + 0.3 p^2.
 
-**Concrete example.** For a binary event, Brier loss `(p-y)^2` penalizes a confident wrong probability more than a cautious wrong probability.
+This is minimized at p=0.7. At p=0.7 the expected loss is 0.21; at p=1 it is 0.30.
 
-**Mathematical anchor.** Strict propriety means the expected score is uniquely optimized by reporting the forecaster's true predictive distribution under the scoring model.
+**Misconception.** proper = calibrated.  
+**Correction.** Propriety is a property of the scoring rule; calibration is an empirical property of forecasts over cases.
 
-**Misconception.** `proper = calibrated`. Correction: propriety is an incentive/evaluation property of the score; calibration is an empirical property of a set of forecasts.
+**Understanding gate.** Differentiate truthful-report incentives from empirical calibration.
 
-**Understanding gate.** Given two probabilities and an outcome, compute both Brier losses and explain why lower loss does not by itself establish calibration.
+## Brier convention
 
-### Forecast Contract
+This repository uses the normalized binary loss
 
-**Intuition.** A forecast cannot be audited unless everyone can later agree what was predicted and how reality will be resolved.
+    BS(p,y) = (p-y)^2.
 
-**Concrete example.** Replace "Will performance be good?" with a binary criterion tied to a fixed test, threshold, deadline and authoritative report.
+For a binary two-category probability vector, Brier's original summed index is twice this value. The convention must be stated whenever results are compared with external work.
 
-**Mathematical anchor.** `F_j=(Q_j,Y_j,T_j,R_j,E_j,A_j,...)` is a local tuple collecting semantics, time, resolution rule, evidence and authority. It is a project formalism, not established external terminology.
+## Brier diversity identity
 
-**Misconception.** `precise wording guarantees a meaningful target`. Correction: a perfectly resolvable event may still be irrelevant, gameable, or causally entangled with the forecasting process.
+For the arithmetic mean p_bar,
 
-**Understanding gate.** Transform one vague engineering question into a resolvable contract and identify a void condition.
+    BS(p_bar,y)
+      = mean_i BS(p_i,y)
+        - mean_i (p_i-p_bar)^2.
 
-### Calibration and sharpness
+**Intuition.** Averaging can reduce squared error because individual deviations partially cancel.
 
-**Intuition.** Calibration asks whether probabilities match long-run frequencies; sharpness asks how concentrated/decisive forecasts are. Sharpness is desirable only if calibration is adequate.
+**Boundary.** This identity does not mean a simple average fully combines independent evidence. Multiple forecasters can each move modestly from a common prior while their pooled evidence would justify a more extreme posterior.
 
-**Misconception.** `more extreme probabilities are better`. Correction: unjustified extremity worsens proper scores and can destroy calibration.
+**Understanding gate.** Explain what the subtraction term represents and why the identity does not prove that averaging is an optimal probabilistic aggregator.
 
-**Understanding gate.** Explain how two forecasters can have similar Brier scores but different calibration/sharpness profiles.
+## Meta-prediction
+
+**Intuition.** Alongside "what probability do you assign?", ask "what average probability do you expect the other forecasters to assign?"
+
+Call the own forecast p_i and the peer-average meta-prediction m_i.
+
+**Why it matters.** Meta-predictions can carry information about what the forecaster believes is shared versus privately known. Published work uses related elicitation to correct aggregation when information is shared or to identify latent expertise.
+
+**Project implementation.** Study 0 evaluates, prospectively and without tuning, a simplified logit recalibration:
+
+    L_bar = mean(logit(p_i))
+    M_bar = mean(logit(m_i))
+    p_meta = logistic(M_bar + a(L_bar-M_bar))
+
+with a fixed a=2 candidate.
+
+**Boundary.** This formula is a project implementation inspired by the literature, not a claim to reproduce Palley--Soll, Martinie--Wilkening--Howe or Peker--Wilkening exactly.
+
+**Misconception.** m_i is the true shared prior.  
+**Correction.** It is another noisy human judgment and may include projection/faux-consensus effects.
+
+**Understanding gate.** Explain why own forecasts alone cannot always reveal which information is common to everyone.
+
+## Forecast Contract
+
+**Intuition.** A forecast cannot be audited unless the event and its resolution are fixed before the answer is known.
+
+**Canonical project tuple.**
+
+    F_j = (Q_j, Omega_j, T_j, R_j, E_j, A_j, B_j, C_j, X_j, S_j)
+
+where the fields represent question, outcome space, timing, resolution rule, authoritative evidence, resolver, institutional references, context, exclusions and safeguards.
+
+**Concrete example.** Replace "Will performance be good?" with a binary criterion tied to a fixed test, deadline, evidence source, base-rate family and resolver.
+
+**Misconception.** precise wording guarantees a meaningful scientific target.  
+**Correction.** A resolvable event can still be irrelevant, gameable or affected by the act of forecasting.
+
+**Understanding gate.** Turn one vague engineering question into a resolvable contract and name one condition that should make it inadmissible.
+
+## Calibration and sharpness
+
+Calibration asks whether stated probabilities agree with observed frequencies across enough comparable cases. Sharpness asks how concentrated the forecasts are.
+
+**Misconception.** more extreme = better.  
+**Correction.** Extremity is useful only when supported by calibration and evidence.
 
 ## Diderot boundary
 
-Canonical reusable versions of these notions should be maintained in `gharbonnier78/mmals-ml-wiki` with source notes, prerequisite links, misconceptions and understanding gates. This file remains the project-local pedagogical map tied to Study 0.
+Canonical reusable versions belong in gharbonnier78/mmals-ml-wiki with external source notes, epistemic status, misconceptions and understanding gates. The project-local Forecast Contract must remain labelled as local terminology.
