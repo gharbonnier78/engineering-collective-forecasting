@@ -18,6 +18,7 @@ resolution:
   resolver_role: "independent evidence resolver"
   ambiguity_rule: "If the source is missing, contradictory, or requires post-hoc reinterpretation of the criterion, mark the contract VOID rather than changing the question."
 institutional_reference:
+  base_rate_status: available
   base_rate_reference_class: "same prospectively defined event family"
   base_rate_source: "approved historical event register"
   accountable_owner_role: "accountable engineering owner"
