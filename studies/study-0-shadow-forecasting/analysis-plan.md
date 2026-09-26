@@ -22,18 +22,28 @@ Lower loss is better.
 
 Every primary-analysis contract must contain, at the same freeze time:
 
-- p_base: historical base-rate probability from the frozen reference class;
 - p_owner: accountable owner's private probability;
 - official_status: the status already used by the organization.
+
+When a defensible historical reference class exists, also freeze:
+
+- p_base: historical base-rate probability;
+- base_rate_status = available.
+
+When it does not, set `base_rate_status = unavailable` with a reason. Base-rate unavailability does **not** remove an otherwise-admissible contract from the primary crowd-vs-owner contrast.
 
 Official status is not silently mapped to a probability unless such mapping was frozen before outcomes.
 
 ## 4. Private collective forecasts
 
+An eligible forecaster must have prospectively established role-relevant knowledge of the event, the system/process producing it, or its authoritative evidence path. Uninformed observers cannot be recruited merely to satisfy composition quotas.
+
 For each eligible forecaster i:
 
 - p_i: own probability;
 - m_i: expected average probability from peers.
+
+The accountable owner is captured separately as the institutional comparator. If the owner also qualifies as a crowd forecaster, the primary crowd aggregate excludes that owner; an including-owner aggregate is descriptive.
 
 All values are private until outcome resolution.
 
@@ -56,16 +66,19 @@ This implementation is inspired by meta-belief/shared-information aggregation li
 
 ## 5. Primary paired contrasts
 
-For each admissible contract j:
+For each otherwise-admissible resolved contract j:
 
     delta_owner_j = BS(p_meta_j,y_j) - BS(p_owner_j,y_j)
+
+For contracts with `base_rate_status = available`:
+
     delta_base_j  = BS(p_meta_j,y_j) - BS(p_base_j,y_j)
 
-Primary summary:
+Primary summary over the full owner-comparable target population:
 
     mean(delta_owner_j)
 
-Required reference summary:
+Required reference summary over the explicitly enumerated base-rate-available subset:
 
     mean(delta_base_j)
 
@@ -95,9 +108,10 @@ ability_to_influence is mandatory:
 - none = observer;
 - indirect or direct = actor.
 
-Report the primary aggregator for:
+Report:
 
-- all admissible participants;
+- the primary crowd aggregate excluding the accountable owner;
+- the descriptive including-owner aggregate when the owner also forecast as an eligible participant;
 - actors only;
 - observers only.
 
@@ -145,13 +159,13 @@ A descriptive skill score may be reported:
 
 only when the base-rate construction was frozen and the denominator is non-zero.
 
-The paired delta_base remains the primary reference because it preserves event-level pairing.
+The paired `delta_base` is a required reference only on contracts with a prospectively defensible base rate because it preserves event-level pairing without biasing the primary crowd-vs-owner target population toward routine event families.
 
 ## 13. Interference
 
 Primary analysis is intention-to-observe: otherwise resolvable contracts remain included regardless of I=0/1/2.
 
-Sensitivity analysis excludes detected I=2 contracts.
+Sensitivity analysis excludes detected I=2 contracts. Report detected interference descriptively by role category (accountable owner, actor, observer) because elicitation-induced reflection may differ by ability to influence the outcome.
 
 The interference assessor and assessment timing must be frozen before outcomes. The assessor should not see forecast accuracy when feasible.
 
@@ -162,7 +176,7 @@ Retain every registered candidate and contract. Distinguish:
 - failed funnel criterion;
 - insufficient participant composition;
 - owner forecast missing;
-- base rate unavailable;
+- base rate unavailable (retain for the primary owner contrast; omit only from base-rate-specific summaries);
 - outcome already known to a participant;
 - missing authoritative evidence;
 - ambiguous resolution;
