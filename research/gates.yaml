@@ -19,7 +19,7 @@ gates:
   - id: G3
     name: Prospective freeze
     status: NOT_STARTED
-    criterion: "Deployment-specific target population, base-rate rule, owner/official references, aggregation constants, admissibility thresholds, stopping rule and initial contracts are frozen before outcome inspection."
+    criterion: "Study 0A feasibility thresholds are frozen before intake; Study 0B target population, base-rate availability rule, owner/official references, participant eligibility/composition, aggregation constants, non-inferiority margin, stopping rule and initial contracts are frozen before participant outcomes are inspected."
 
   - id: G4
     name: Study 0 execution
