@@ -45,6 +45,23 @@ A private deployment specifies separate retention for:
 - evidence references and resolution;
 - de-identified analysis extracts.
 
+## AI assistant use and EU AI Act boundary
+
+AI-assistant use is permitted only as a **declared ancillary information source**, through an organization-approved usage path.
+
+Required controls:
+
+- record `ai_assistant_consulted` and, where allowed, a coarse assistance category;
+- do not place confidential engineering evidence, personal data, secrets, or restricted project material into an assistant unless the specific approved deployment path authorizes that processing;
+- do not copy prompts or assistant transcripts into the public research repository;
+- treat assistant outputs as non-authoritative; the human participant owns the forecast and authoritative resolution evidence remains external to the assistant;
+- provide role-appropriate AI literacy and usage guidance to participants;
+- preserve the no-HR-use rule for forecasts, AI-use flags, scores and longitudinal records.
+
+For professional use under an organization's authority, current European Commission guidance treats the legal person as the deployer rather than each employee acting under its instructions. Article 4 of Regulation (EU) 2024/1689 requires providers and deployers to take measures, to their best extent, to ensure sufficient AI literacy of staff using AI systems. Article 50 transparency obligations apply from 2 August 2026 to certain interactive/generative systems and outputs. This protocol does not assume that ordinary AI-assistant consultation is automatically a high-risk use; however, repurposing AI outputs or forecasting records to monitor/evaluate workers, allocate tasks based on individual characteristics, or influence employment decisions would require a separate AI Act classification and may bring Annex III employment use cases into scope.
+
+This section is a protocol compliance boundary, not legal advice.
+
 ## Legal/compliance boundary
 
 This repository is not legal advice. Any internal employee-data collection must pass normal privacy, security, HR/labor, compliance and works-council processes where applicable.
