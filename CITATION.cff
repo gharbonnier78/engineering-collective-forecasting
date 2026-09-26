@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this research framework, cite the repository and the eventual paper version you actually used."
+message: "If you use this research framework, cite the immutable repository commit and the paper version actually used."
 title: "Engineering Collective Forecasting"
 type: software
 authors:
@@ -7,5 +7,5 @@ authors:
     given-names: Guillaume
 repository-code: "https://github.com/gharbonnier78/engineering-collective-forecasting"
 license: MIT
-version: "0.1.0-protocol"
-date-released: "2026-09-25"
+version: "0.2.0-protocol-redesign"
+date-released: "2026-09-26"
