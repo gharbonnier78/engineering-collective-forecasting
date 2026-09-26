@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\setlist[itemize]{label=$\bullet$}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black,
+  pdftitle={Engineering Collective Forecasting: Turning Distributed Engineering Knowledge into Auditable Probabilistic Evidence},
+  pdfauthor={Guillaume Harbonnier}
+}
+\title{Engineering Collective Forecasting:\\Turning Distributed Engineering Knowledge into Auditable Probabilistic Evidence}
+\author{Guillaume Harbonnier}
+\date{Protocol preprint -- revised 26 September 2026}
+
+\newcommand{\BS}{\mathrm{BS}}
+\newcommand{\logitop}{\operatorname{logit}}
+\newcommand{\sigmoid}{\operatorname{logistic}}
+
+\begin{document}
+\maketitle
+\input{sections/01-framing}
+\input{sections/02-study-design}
+\input{sections/03-governance-roadmap}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

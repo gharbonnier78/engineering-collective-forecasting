@@ -1,0 +1,2 @@
+contract_id,participant_pseudonym,forecasted_at,probability,meta_predicted_peer_mean,role_category,eligibility_basis,is_accountable_owner,information_visibility,ability_to_influence,outcome_already_known,ai_assistant_consulted,ai_assistance_category,evidence_that_would_change_estimate
+FC-EXAMPLE-001,P001,2026-10-01T09:00:00Z,0.62,0.55,integration,role-relevant integration knowledge,no,mixed,indirect,no,no,none,additional_test

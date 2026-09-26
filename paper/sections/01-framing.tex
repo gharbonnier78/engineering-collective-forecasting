@@ -1,0 +1,35 @@
+\begin{abstract}
+Engineering decisions often depend on information distributed across technical and operational actors and only partly represented in structured project data. This protocol asks whether that distributed knowledge can become auditable probabilistic evidence \emph{beyond what the organization already knows}, without perturbing the engineering process being observed. Following independent review of an earlier prediction-market-centered design, Study~0 now applies a minimum-sufficient-mechanism principle. Study~0A is a dry funnel that tests whether real engineering events can be prospectively converted into important, uncertain, objectively resolvable and confidentiality-safe Forecast Contracts. Study~0B, only if warranted, uses private probability elicitation: a historical base rate, the accountable owner's private probability and official status, and independent participant forecasts plus meta-predictions are frozen at the same information time. No collective aggregate is exposed before resolution. The primary comparison is the paired Brier-loss difference between a prospectively fixed private collective aggregator and the owner's forecast, with the base rate as a required reference and dependence handled at the operational-cluster level. Prediction markets are deferred to a later intervention-aware study. No empirical superiority or operational-value claim is made at protocol stage.
+\end{abstract}
+
+\section{Motivation}
+Complex engineering programs rarely possess a single complete view of readiness. Integration, test, environment, product and operational actors can hold different pieces of information, some documented and some local or recent. The first scientific question is therefore not which sophisticated mechanism should aggregate that information, but whether a prospectively measurable distributed signal exists at all.
+
+The bounded research question is:
+
+\begin{quote}
+Can distributed engineering knowledge be transformed into calibrated, auditable and incrementally useful probabilistic evidence beyond institutional knowledge, without materially interfering with the engineering process being observed?
+\end{quote}
+
+``Incrementally useful'' requires an explicit comparator. Study~0 therefore records, at the same freeze time, a historical reference-class probability, an accountable owner's private probability, the existing official status, and the private collective forecasts.
+
+\section{Why private collective forecasting precedes a market}
+Prediction markets have been used as information-aggregation mechanisms in firms and experiments \citep{chenplott2002,cowgill2009,cowgill2015}. However, market participation can be thin, correlated and biased; Google market evidence documents optimism and social/workplace correlation \citep{cowgill2009}. Polling studies also show that ``just asking'' can carry substantial information and that markets are not a sufficient baseline by themselves \citep{atanasov2017,dana2019}.
+
+A market also displays an aggregate to participants. If those participants work on the outcome, that visibility can alter behavior. Study~0 therefore removes the market rather than attempting to call that exposure ``shadow''.
+
+\section{Private aggregation and shared information}
+A simple average is an important baseline but need not be the best probability aggregate. Averaging can compress forecasts toward the middle, and individual forecasters may each condition on only part of the available evidence \citep{baron2014}. When information is shared, correlated errors can also limit crowd gains. Meta-predictions---asking what respondents expect others to report---provide one way to estimate shared information or latent expertise \citep{palley2019,martinie2020,peker2025}.
+
+Study~0B therefore elicits both an own probability $p_i$ and a meta-prediction $m_i$ privately. A fixed project-level recalibration is evaluated without tuning on Study~0 outcomes. This does not claim that the project implementation reproduces any one published algorithm exactly.
+
+\section{The Forecast Contract}
+A prediction is auditable only if its meaning and resolution are fixed before the answer is known. Howard's clarity-test tradition motivates the general requirement that an uncertain event be stated so that later observation can settle it without semantic renegotiation \citep{howard1988}. We introduce the project-local object
+\[
+\mathcal F_j=(Q_j,\Omega_j,T_j,R_j,E_j,A_j,B_j,C_j,X_j,S_j),
+\]
+where $Q_j$ is the question, $\Omega_j$ the outcome space, $T_j$ the timing contract, $R_j$ the resolution rule, $E_j$ the authoritative evidence, $A_j$ the resolver role, $B_j$ the institutional-reference definition, $C_j$ shared context, $X_j$ exclusions and $S_j$ safeguards.
+
+\textbf{Forecast Contract} is local project terminology, not an external standard.
+
+A good candidate must be important, uncertain at the intended freeze time, objectively resolvable, compatible with an authoritative evidence source, confidentiality-safe and suitable for non-interfering observation.

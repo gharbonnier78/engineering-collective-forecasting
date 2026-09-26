@@ -1,0 +1,2 @@
+candidate_id,event_family,identified_at,drafting_started_at,contract_frozen_at,resolved_at,drafting_effort_minutes,important,uncertain,resolvable,authoritative_evidence_available,confidentiality_safe,non_interfering,base_rate_reference_available,potential_eligible_actors,potential_eligible_observers,admitted_contract_id,rejection_reason_code,resolution_status,resolution_notes
+CAND-001,qualification,2026-10-01T08:00:00Z,2026-10-01T08:15:00Z,2026-10-01T09:00:00Z,2026-10-10T12:00:00Z,35,yes,yes,yes,yes,yes,yes,yes,4,3,FC-EXAMPLE-001,NONE,RESOLVED_TRUE,synthetic example

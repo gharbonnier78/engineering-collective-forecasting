@@ -1,0 +1,53 @@
+name: paper
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - name: Install TeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-base texlive-latex-extra texlive-pictures texlive-bibtex-extra
+      - name: Record exact build source and environment
+        run: |
+          {
+            echo "runner=ubuntu-24.04"
+            echo "workflow_trigger_sha=${GITHUB_SHA}"
+            echo "checked_out_head_sha=$(git rev-parse HEAD)"
+            echo "source_date_epoch=$(git show -s --format=%ct HEAD)"
+            pdflatex --version
+            latexmk -v
+          } > paper-build-environment.txt
+          test "$(git rev-parse HEAD)" = "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}"
+      - name: Build first copy
+        run: bash scripts/build_paper.sh
+      - name: Preserve first copy
+        run: cp paper/engineering_collective_forecasting.pdf /tmp/ecf-paper-first.pdf
+      - name: Clean and rebuild
+        run: |
+          make clean
+          bash scripts/build_paper.sh
+      - name: Verify exact-head deterministic bytes and record PDF hash
+        run: |
+          cmp /tmp/ecf-paper-first.pdf paper/engineering_collective_forecasting.pdf
+          sha256sum paper/engineering_collective_forecasting.pdf | tee paper-sha256.txt
+      - name: Upload PDF and build record
+        uses: actions/upload-artifact@v4
+        with:
+          name: engineering-collective-forecasting-paper
+          path: |
+            paper/engineering_collective_forecasting.pdf
+            paper-build-environment.txt
+            paper-sha256.txt

@@ -1,0 +1,10 @@
+contract_id: FC-EXAMPLE-001
+contract_version: "0.2"
+resolution_status: RESOLVED_TRUE  # RESOLVED_TRUE | RESOLVED_FALSE | VOID_AMBIGUOUS | VOID_MISSING_EVIDENCE
+resolved_at: "2026-10-10T12:00:00Z"
+resolver_role: "independent evidence resolver"
+authoritative_evidence_ref: "private-system://approved-record-id"
+outcome: 1
+interference_level: 0
+interference_assessor_role: "independent research data custodian"
+notes: "Interference is not a resolution status. Do not copy confidential evidence into the public repository."

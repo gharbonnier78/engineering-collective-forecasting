@@ -1,0 +1,28 @@
+name: research-assurance
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Static compile check
+        run: python -m compileall analysis scripts tests
+      - name: Secret-pattern review
+        run: python scripts/check_secrets.py
+      - name: Structural and schema assurance
+        run: python scripts/validate_repo.py
+      - name: Unit and mutation-sensitive tests
+        run: python -m unittest discover -s tests -v

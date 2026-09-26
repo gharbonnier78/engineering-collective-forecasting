@@ -1,0 +1,124 @@
+\section{Study 0 design}
+
+\subsection{Study 0A: dry contract funnel}
+Study~0A runs before participant forecasting. During a frozen 4--6 week intake window, candidate events from predeclared engineering families are logged prospectively. No market and no forecast participants are used. Each candidate is evaluated for importance, uncertainty, resolvability, authoritative evidence, confidentiality safety and non-interference suitability. Base-rate availability is recorded but is not itself an admission criterion.
+
+Passing candidates are frozen as Forecast Contracts and later resolved using their declared evidence. Study~0A estimates the candidate-to-admissible and admissible-to-clean-resolution fractions. Before intake, the protocol freezes a minimum admissible yield, a minimum clean-resolution rate and a maximum projected time to reach the Study~0B structural targets. The protocol-candidate defaults are 0.30, 0.80 and 26 weeks respectively, with $J_{min}=30$ contracts and $K_{min}=8$ independent clusters. Candidate actor/observer pool counts and drafting effort are collected without participant forecasting. This is the primary feasibility test.
+
+\subsection{Study 0B: private forecasting}
+Study~0B starts only if Study~0A and governance gates justify continuation. At a common freeze time $T_f$, the study captures:
+\[
+p_j^{\mathrm{base}},\qquad
+p_j^{\mathrm{owner}},\qquad
+s_j^{\mathrm{official}},\qquad
+\{p_{ij},m_{ij}\}_{i=1}^{n_j}.
+\]
+The first term is present when a defensible historical base rate exists, the second is the accountable owner's private probability, the third is the existing official status, and the final pair contains each participant's own probability and expected peer-average probability. Absence of a defensible base rate does not remove an otherwise-admissible contract from the primary crowd-versus-owner comparison.
+
+No participant sees another forecast, the base rate, owner forecast or any aggregate before resolution. The data custodian also hides aggregates from any study-team member with decision authority over the contract. Eligible forecasters must have role-relevant knowledge of the event, its generating process or its evidence path; uninformed observers cannot be recruited merely to satisfy a quota. The accountable owner may also forecast only if independently eligible, but the primary crowd aggregate excludes that owner and an including-owner aggregate is descriptive.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  node distance=7mm and 9mm,
+  box/.style={draw, rounded corners, align=center, inner sep=5pt, text width=3.2cm},
+  arrow/.style={-{Latex[length=2mm]}, thick}
+]
+\node[box] (cand) {planned engineering events};
+\node[box, below=of cand] (funnel) {Study 0A\\contract funnel};
+\node[box, below=of funnel] (contract) {frozen Forecast Contract};
+\node[box, below left=of contract] (inst) {same-time institutional\\base rate + owner + status};
+\node[box, below right=of contract] (crowd) {private crowd\\$p_i$ + meta $m_i$};
+\node[box, below=18mm of contract] (outcome) {authoritative\\resolved outcome};
+\node[box, below=of outcome] (analysis) {paired probabilistic\\evaluation};
+\draw[arrow] (cand) -- (funnel);
+\draw[arrow] (funnel) -- (contract);
+\draw[arrow] (contract) -- (inst);
+\draw[arrow] (contract) -- (crowd);
+\draw[arrow] (inst) -- (analysis);
+\draw[arrow] (crowd) -- (analysis);
+\draw[arrow] (outcome) -- (analysis);
+\end{tikzpicture}
+\caption{Minimum-sufficient Study~0 sequence. No aggregate is exposed before resolution.}
+\end{figure}
+
+\subsection{Frozen elements}
+Table~\ref{tab:freeze} summarizes the minimum prospective freeze.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{p{0.28\linewidth}p{0.62\linewidth}}
+\toprule
+Element & Frozen content \\
+\midrule
+Event & question, binary outcome, cluster, open/close/resolve times \\
+Resolution & authoritative evidence, rule, resolver and ambiguity handling \\
+Institutional reference & base-rate availability/rule, owner role and official-status source \\
+Participants & eligibility, actor/observer quotas, abstention and AI-assistance metadata \\
+Aggregation & raw mean/median plus fixed meta-belief rule and constants \\
+Analysis & Brier convention, estimands, cluster bootstrap, stopping and continuation rule \\
+Safeguards & data custodian, pre-resolution visibility prohibitions and no-HR-use controls \\
+\bottomrule
+\end{tabular}
+\caption{Elements fixed before outcome inspection.}
+\label{tab:freeze}
+\end{table}
+
+\subsection{Actor and observer as a design factor}
+Forecasts about one's own task can differ systematically from observer forecasts; planning-fallacy work documents actor/observer asymmetries in completion-time judgments \citep{buehler1994}. Study~0 therefore preregisters participation composition and reports actor-only and observer-only aggregates, rather than treating influence over the outcome as optional metadata.
+
+\subsection{Primary private collective aggregator}
+For clipped probabilities in $[0.01,0.99]$, define
+\[
+L_i=\logitop(p_i),\qquad M_i=\logitop(m_i).
+\]
+With
+\[
+\bar L=\frac1n\sum_iL_i,\qquad
+\bar M=\frac1n\sum_iM_i,
+\]
+the default protocol candidate uses the fixed transform
+\[
+p^{\mathrm{crowd}}=\sigmoid\!\left(\bar M+a(\bar L-\bar M)\right),\qquad a=2.
+\]
+The constant is frozen before outcomes and is not tuned on Study~0. Mean and median remain required comparators. The transform is a project implementation motivated by meta-belief/shared-information literature \citep{palley2019,peker2025}, not an assertion that it is their exact published algorithm.
+
+\section{Scoring and estimands}
+For binary outcome $y_j\in\{0,1\}$ this repository uses
+\[
+\BS(p,y)=(p-y)^2.
+\]
+This is the normalized one-component binary quadratic/Brier loss. Brier's original two-category vector sum is twice this quantity for a binary event; the repository uses the convention above consistently \citep{brier1950,gneiting2007}.
+
+The primary paired contrast is
+\[
+\Delta_j^{\mathrm{owner}}
+=
+\BS\!\left(p_j^{\mathrm{crowd}},y_j\right)
+-
+\BS\!\left(p_j^{\mathrm{owner}},y_j\right).
+\]
+For contracts with a defensible prospectively frozen base rate, the required reference contrast is
+\[
+\Delta_j^{\mathrm{base}}
+=
+\BS\!\left(p_j^{\mathrm{crowd}},y_j\right)
+-
+\BS\!\left(p_j^{\mathrm{base}},y_j\right).
+\]
+Each otherwise-admissible resolved contract receives equal weight in the primary crowd-versus-owner estimand; $\Delta^{\mathrm{base}}$ is reported on the explicitly enumerated base-rate-available subset. Cluster identifiers are assigned prospectively when contracts share an operational episode; bootstrap resampling occurs at that cluster level.
+
+\subsection{Why the mean remains useful}
+For the arithmetic mean $\bar p$,
+\[
+\BS(\bar p,y)
+=
+\frac1n\sum_i \BS(p_i,y)
+-
+\frac1n\sum_i(p_i-\bar p)^2.
+\]
+The identity shows how disagreement can improve the squared-error performance of an average relative to average individual error. It does not imply that probability averaging fully pools independent evidence.
+
+\subsection{Calibration and sample size}
+Calibration and sharpness are reported descriptively at Study~0 scale. The protocol-candidate continuation gate uses $J_{min}=30$, $K_{min}=8$ and $\delta_{NI}=0.02$ on the normalized Brier-loss scale unless a deployment freezes different values before Study~0A begins. At this scale the gate is deliberately a screening/non-inferiority rule: it can reject a crowd that is clearly worse than the owner but cannot establish that the crowd is better. If reliable discrimination near equality is required, a larger $J$ must be planned prospectively rather than widening the margin after outcomes.
