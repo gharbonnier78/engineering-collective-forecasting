@@ -1,4 +1,4 @@
-schema_version: "0.1"
+schema_version: "0.2"
 
 harness:
   repository: gharbonnier78/scientific-research-harness
@@ -17,16 +17,16 @@ authority:
   sources:
     - id: "source-notes"
       reference: "research/sources/"
-      role: "Reviewed notes describing what each external source supports and does not support."
+      role: "Per-source notes describing what external literature supports and does not support."
     - id: "study0-preregistration"
       reference: "studies/study-0-shadow-forecasting/preregistration.md"
-      role: "Prospective authority for Study 0 estimands, comparisons, exclusions, stopping and analysis once frozen before outcome inspection."
+      role: "Prospective authority for Study 0A/0B target population, baselines, aggregation, estimands, stopping and analysis once frozen."
     - id: "forecast-contracts"
       reference: "schemas/forecast-contract.schema.json"
-      role: "Local schema for prospective forecast questions and their resolution evidence."
+      role: "Local machine-readable contract for prospective event semantics, institutional references, resolution and safeguards."
   domain_experts: []
   prohibited_substitution:
-    - "The harness, market platform, LLM, Diderot, and forecasting mechanism do not replace authoritative engineering evidence or accountable decision ownership."
+    - "The harness, LLM, Diderot, poll, market or model does not replace authoritative engineering evidence or accountable decision ownership."
 
 artifacts:
   claims:
@@ -41,29 +41,35 @@ artifacts:
   pedagogy:
     - docs/pedagogy.md
     - research/sources/
-  handoff: "research/chronicle/2026-09-25--bootstrap.md"
+  handoff: "research/chronicle/2026-09-26--review-v2-redesign.md"
 
 execution:
   engineering:
     care_profile: "POC"
-    rationale: "The repository contains executable validation and reference analysis code but no deployed service. The POC profile is sufficient while scientific protocols remain pre-launch; escalation is required before hosting participant data or operating a live market service."
+    rationale: "The repository contains protocol validation, reference analysis and paper-build code but no deployed participant-facing service. The POC profile remains appropriate before live data collection."
     required_checks:
+      - "python -m pip install -r requirements.txt"
+      - "python -m compileall analysis scripts tests"
+      - "python scripts/check_secrets.py"
       - "python scripts/validate_repo.py"
       - "python -m unittest discover -s tests -v"
-      - "latexmk -pdf -interaction=nonstopmode -halt-on-error paper/engineering_collective_forecasting.tex"
+      - "make paper"
     deferred_controls:
-      - control: "Production threat model and live identity/data controls"
-        risk: "Needed only if this repository evolves into a deployed participant-facing system."
-        escalation_trigger: "Any live forecasting service, SSO integration, employee data ingestion, or automated connection to internal engineering systems."
-        next_action: "Upgrade care profile and create a deployment-specific threat model before exposure."
-  environment_lock: "requirements.txt + GitHub Actions workflow versions; LaTeX package set documented in paper/README.md"
+      - control: "Production threat model, identity controls and private data-store controls"
+        risk: "Required before any live employee forecast collection or connector/SSO deployment."
+        escalation_trigger: "Any participant-facing service, employee-data ingestion, SSO integration, external platform, or automated connection to internal engineering systems."
+        next_action: "Upgrade engineering-care profile and create deployment-specific security/privacy evidence before exposure."
+  environment_lock: "Python validation dependencies are pinned in requirements.txt. CI runner is pinned to ubuntu-24.04; the paper build records pdflatex/latexmk versions and normalizes source time. Reproducibility claims are bounded to the recorded environment, not all future TeX distributions."
   replay_commands:
+    - "python -m pip install -r requirements.txt"
+    - "python -m compileall analysis scripts tests"
+    - "python scripts/check_secrets.py"
     - "python scripts/validate_repo.py"
     - "python -m unittest discover -s tests -v"
     - "make paper"
   randomness:
     status: "declared"
-    root_entropy_policy: "Study 0 reference bootstrap uses the frozen integer seed declared in preregistration.md; random resampling is event/cluster level, never trade level."
+    root_entropy_policy: "Reference uncertainty analysis uses the frozen integer seed declared in the deployment preregistration and resamples independent operational clusters, never participant rows or timestamps."
     lineage_artifact: "studies/study-0-shadow-forecasting/preregistration.md"
   concurrency:
     status: "not_applicable"
@@ -72,11 +78,17 @@ execution:
 
 local_extensions:
   - "Forecast Contract as a local evidence-resolution object."
-  - "Shadow-mode interference classification and non-interference safeguard."
+  - "Dry contract funnel before participant forecasting."
+  - "Private collective forecasting against same-time institutional references."
+  - "Actor/observer design factor and independent pre-resolution data custody."
 
-deviations: []
+deviations:
+  - id: "LATEX-ENV-001"
+    status: "bounded"
+    rationale: "GitHub-hosted ubuntu-24.04 is not a forever-immutable container image. The workflow records tool versions and verifies same-head deterministic rebuilds; cross-era bit identity is not claimed."
 
 adoption:
   adopted_at: "2026-09-25"
+  amended_at: "2026-09-26"
   adopted_by: "ChatGPT with explicit user authorization"
-  notes: "Bootstrap of an independent research programme. Domain-specific content stays local; reusable methodological improvements discovered here should be proposed upstream to the harness after evidence and independent review."
+  notes: "Bootstrap protocol received independent PARTIAL ACCEPT at c8a3516. The 2026-09-26 amendment applies SDR-002 by removing the prediction market from Study 0, adding a dry contract funnel and redefining incremental usefulness against owner, official status and base-rate references."
