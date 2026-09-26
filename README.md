@@ -1,104 +1,93 @@
 # Engineering Collective Forecasting
 
-**Research question:** can distributed engineering knowledge be transformed into calibrated, auditable and incrementally useful probabilistic evidence without interfering with the engineering process being observed?
+**Research question:** can distributed engineering knowledge become calibrated, auditable and incrementally useful probabilistic evidence beyond what the organization already knows, without perturbing the engineering process being observed?
 
-This repository studies **individual forecasting, simple aggregation, prediction markets, and later human-machine ensembles** as evidence sensors for engineering uncertainty. The first study is deliberately conservative: a **shadow-mode** protocol that forecasts outcomes of engineering activities that were already planned, without exposing forecasts to operational decision owners before resolution.
+This repository studies **private collective forecasting first**, then progressively more complex aggregation mechanisms. Prediction markets remain an important later hypothesis, but they are no longer the mechanism under test in Study 0.
 
 > **Prediction is evidence, not authority.** Forecasts estimate uncertainty. Accountable engineering governance retains the decision.
 
 ## Status
 
-- Repository phase: **bootstrap / protocol design**
-- Study 0: **not launched**
-- Scientific claims: **none about operational benefit yet**
-- Primary artifact: `paper/engineering_collective_forecasting.tex`
-- PDF: built reproducibly by CI and uploaded as the `engineering-collective-forecasting-paper` workflow artifact
-- Method dependency: `gharbonnier78/scientific-research-harness@e8e043c2b66a74ccacd023d67a32f989885449eb`
+- Repository phase: **protocol redesign after independent review**
+- Independent review of bootstrap PR: **PARTIAL ACCEPT; G1 not released**
+- Study 0A: **dry Forecast Contract funnel, not launched**
+- Study 0B: **private shadow forecasting, not launched**
+- Scientific claims: **none about operational benefit or prediction-market superiority**
+- Primary artifact: paper/engineering_collective_forecasting.tex
+- Method dependency: gharbonnier78/scientific-research-harness@e8e043c2b66a74ccacd023d67a32f989885449eb
 
-## Core objects
+## Minimum-sufficient research sequence
 
-The study revolves around a versioned **Forecast Contract**. A contract fixes the forecast question, outcome space, opening/closing/resolution times, objective resolution rule, authoritative evidence, resolver role, shared context, exclusions, and safeguards before forecasts are analyzed.
+    Study 0A — dry contract funnel
+        candidate engineering events
+                  |
+                  v
+     important / uncertain / resolvable /
+     non-interfering / confidentiality-safe
+                  |
+                  v
+     prospectively frozen Forecast Contracts
+                  |
+                  v
+     clean resolution from authoritative evidence
 
-Study 0 compares, at minimum:
+    Study 0B — private forecasting only
+                  |
+          same freeze time T_f
+                  |
+       +----------+-----------+
+       |          |           |
+    base rate   owner       private crowd
+      R0          R1       p_i + meta m_i
+       |          |           |
+       |          |      frozen aggregator
+       +----------+-----------+
+                  |
+                  v
+          authoritative outcome
+                  |
+                  v
+     paired Brier / skill / calibration
 
-1. independent private forecasts;
-2. simple mean/median aggregation;
-3. a prediction-market aggregate;
-4. a designated-expert forecast when naturally available.
+No collective aggregate is shown to participants, decision owners, or members of the study team who hold decision authority over that contract before resolution.
 
-A data/model forecast may be added only when it already exists for operational reasons; Study 0 does not create a large ML model merely to stage a human-vs-AI contest.
+## Study 0 baselines
 
-## Repository map
+At the same frozen time T_f, Study 0B records:
 
-```text
-AGENTS.md                         agent startup and mutation rules
-harness-adoption.yaml             immutable harness dependency and local adoption
-paper/                            arXiv-like preprint source + bibliography
-studies/study-0-shadow-forecasting/
-                                  protocol, preregistration, analysis, threats, safeguards
-schemas/forecast-contract.schema.json
-                                  machine-readable Forecast Contract contract
-templates/                        forecast, resolution and event-register templates
-analysis/                         reference analysis code
-research/sources/                 reviewed source notes
-research/chronicle/               append-only research decisions and handoff
-reviews/                          independent AI reviewer prompt and review form
-docs/                             data governance, Hypermind instrumentation note, roadmap
-.github/workflows/                assurance and PDF build
-```
+- **R0 — base rate:** historical probability for the preregistered event family;
+- **R1 — institutional signal:** accountable owner's private probability plus the official status already used by the organization;
+- **R2 — private collective signal:** independent probabilities plus a meta-prediction of the average probability expected from peers.
 
-## Study 0 in one diagram
+The primary scientific question is **R2 vs R1**, with skill against **R0** as a required reference. Mean and median are retained; a prospectively fixed meta-belief recalibration is evaluated without tuning on Study 0 outcomes.
 
-```text
-existing engineering activity
-          |
-          v
-  frozen Forecast Contract
-          |
-   +------+------+
-   |             |
-private       market phase
-forecasts        |
-   |             |
-mean/median      |
-   +------+------+
-          |
-   frozen predictions
-          |
-          v
-existing authoritative evidence ----> resolved outcome
-          |                                  |
-          +---------------+------------------+
-                          v
-             calibration / Brier score /
-          incremental value / interference
-```
+## Prediction markets
 
-## Public-repository boundary
+Prediction markets are moved to a later study. A market exposes an aggregate to its participants; when those participants can influence the engineering outcome, that exposure is itself an intervention. A later market study must therefore use an explicitly intervention-aware design or an observers-only arm and compare the market at the **same information time** with a qualified private-poll aggregator.
 
-This repository is intentionally **generic and non-sensitive**. Internal project names, customer identifiers, unreleased architecture, vulnerability details, proprietary metrics, employee identities, and raw internal rationales must not be committed here. A deployment-specific overlay belongs in an approved private system of record and should reference this public protocol by immutable commit.
+## Core object: Forecast Contract
 
-## Quick validation
+A Forecast Contract prospectively freezes the event, cluster, private-forecast window, outcome space, authoritative evidence, resolver, institutional references, exclusions, data custodian and safeguards. It exists to prevent semantic drift after the outcome is known.
 
-```bash
-python scripts/validate_repo.py
-python -m unittest discover -s tests -v
-```
+## Public/private boundary
 
-Build the paper locally with a LaTeX distribution:
+The public repository contains only generic schemas, code, methods and approved aggregate results. Customer/program identifiers, employee identities, internal statuses, unreleased architectures, vulnerabilities, raw rationales and live vendor evaluations belong only in an approved private overlay that pins this repository by immutable commit.
 
-```bash
-make paper
-```
+## Validation
 
-## Evidence status
+    python -m pip install -r requirements.txt
+    python scripts/validate_repo.py
+    python scripts/check_secrets.py
+    python -m compileall analysis scripts tests
+    python -m unittest discover -s tests -v
+    make paper
 
-The literature supports the feasibility of prediction markets as information-aggregation mechanisms in several corporate and forecasting settings, but those findings do **not** establish effectiveness in this engineering context. Study 0 exists to test the local question with explicit baselines, resolution evidence, interference controls, and bounded claims.
+The PDF workflow normalizes source dates, verifies two same-head builds have identical hashes in the recorded CI environment, and records the TeX toolchain versions with the artifact. This is a bounded reproducibility claim, not a promise that an unpinned future TeX distribution will emit the same bytes.
 
-## Related research boundaries
+## Research boundary
 
-Natural future links exist to probabilistic engineering models, executable/evidence contracts, human-machine forecasting, and sequential evidence acquisition. These are recorded as **extensions**, not as assumptions required to justify Study 0. In particular, GO-ED-POMDP is not part of the Study 0 causal or statistical claim.
+Corporate prediction-market evidence, polling research, aggregation theory and meta-prediction literature motivate mechanisms and threats. They do not establish effectiveness in this engineering context. Study 0 first asks whether usable, resolvable events exist and whether private distributed forecasts add signal beyond institutional knowledge.
 
 ## License
 
-Code is released under the MIT License. Original documentation is intended for reuse under CC BY 4.0; see `LICENSE-CONTENT.md`.
+Code: MIT. Original documentation: CC BY 4.0; see LICENSE-CONTENT.md.
