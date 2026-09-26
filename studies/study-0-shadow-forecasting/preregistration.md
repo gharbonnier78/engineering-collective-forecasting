@@ -49,6 +49,20 @@ At the end of Study 0A, compute the observed admissible yield, clean-resolution 
 
 The funnel register must capture identification, drafting/freeze and resolution timestamps, drafting effort, candidate actor/observer pool counts, and a controlled rejection-reason code so these quantities can be computed without participant forecasting.
 
+Allowed `rejection_reason_code` values are:
+
+- `NONE`;
+- `NOT_IMPORTANT`;
+- `NOT_UNCERTAIN`;
+- `NOT_RESOLVABLE`;
+- `NO_AUTHORITATIVE_EVIDENCE`;
+- `CONFIDENTIALITY_UNSAFE`;
+- `INTERFERENCE_RISK`;
+- `OUT_OF_SCOPE_EVENT_FAMILY`;
+- `OTHER_PREDECLARED`.
+
+Base-rate unavailability is **not** a Study 0A rejection reason by itself.
+
 ## 2. Study 0B — research questions
 
 Study 0B starts only if the frozen Study 0A decision rule passes and G1/G2/G3 permit it.
@@ -93,7 +107,7 @@ Capture:
 - official status already in force at T_f, such as the existing RAG/readiness status;
 - source of that official status.
 
-The official status remains descriptive unless a numeric mapping was prospectively defined before outcomes.
+The official status remains descriptive unless a numeric mapping was prospectively defined before outcomes. For the pre-specified descriptive "institutionally positive but privately doubtful" table, freeze before Study 0B collection the exact set of status values counted as positive/green; no post-outcome relabelling is allowed.
 
 ### R2 — private collective signal
 
