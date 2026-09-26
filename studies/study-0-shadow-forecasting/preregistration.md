@@ -1,175 +1,273 @@
 # Study 0 preregistration template
 
-Status: **protocol candidate - must be frozen before Study 0 outcome inspection**
+Status: **protocol candidate — must be frozen before any Study 0 outcome is inspected**
 
-This document specifies the default design. A real deployment must fill all bracketed fields, record an immutable commit/hash, and obtain the required organizational authorization before collection.
+Study 0 is split into two stages. Study 0A tests whether usable Forecast Contracts exist in the real engineering pipeline. Study 0B then tests whether private distributed forecasts add information beyond institutional knowledge. Prediction markets are outside Study 0.
 
-## 1. Research questions
+## 1. Study 0A — dry Forecast Contract funnel
 
-**RQ0 - Feasibility.** Can prospectively specified Forecast Contracts be elicited and resolved with low participant burden and without material interference in the observed engineering process?
+Duration: choose and freeze a 4–6 week intake window before starting.
 
-**RQ1 - Forecast validity.** What probabilistic accuracy and calibration do independent forecasts, simple aggregates and a market aggregate exhibit on the resolved contract set?
+No participants and no forecasting platform are used.
 
-**RQ2 - Incremental aggregation.** What is the paired difference in Brier score between the market close probability and the simple mean of independent pre-market forecasts?
+Every candidate event encountered in the predefined event families is entered into the funnel register and assessed prospectively against:
 
-**RQ3 - Conditions of usefulness (exploratory).** Is market gain associated with initial belief dispersion, role diversity, or the presence of locally held information?
+- engineering importance;
+- genuine uncertainty at the intended freeze time;
+- objective resolvability;
+- pre-existing authoritative evidence;
+- confidentiality/publication safety;
+- non-interference suitability;
+- event-family membership sufficient to define a base-rate rule.
 
-## 2. Primary estimand
+For candidates that pass, create and freeze a Forecast Contract before the event resolves. After the event, record whether it resolved cleanly, became ambiguous, lacked evidence, or violated the intended scope.
 
-For admissible resolved binary contracts indexed by j:
+### Study 0A estimands
 
-\[
-\Delta_j = BS(p^{M}_j,y_j)-BS(p^{mean}_j,y_j),
-\qquad BS(p,y)=(p-y)^2.
-\]
+Report:
 
-Primary estimand:
+- candidate-to-admissible fraction;
+- admissible-to-cleanly-resolved fraction;
+- reasons for rejection or void;
+- event-family distribution;
+- time required to draft and resolve contracts.
 
-\[
-\Delta = \frac{1}{J}\sum_{j=1}^{J}\Delta_j.
-\]
+Study 0A is the primary feasibility test. It makes no forecasting-skill claim.
 
-Negative values favor the market aggregate on the observed contract set. The estimand is descriptive of the sampled contracts; external generalization requires additional studies.
+## 2. Study 0B — research questions
 
-If multiple contracts belong to the same operational episode, release, campaign, or tightly coupled event cluster, uncertainty resampling must occur at that cluster level rather than pretending each contract is independent.
+Study 0B starts only if Study 0A and G1/G2/G3 permit it.
 
-## 3. Baselines
+**RQ1 — incremental private collective signal.** At a common frozen information time, does a prospectively specified private collective forecast add predictive information beyond the accountable owner's private probability?
 
-Required:
+**RQ2 — base-rate skill.** Does that collective forecast improve on the historical base rate for the same prospectively defined event family?
 
-- `individual_mean`: arithmetic mean of independent pre-market probabilities;
-- `individual_median`: median of independent pre-market probabilities;
-- `market_close`: last valid market probability before the frozen close time.
+**RQ3 — aggregation method (secondary/exploratory).** How do the raw mean, median and a fixed meta-belief recalibration compare without tuning on Study 0 outcomes?
 
-Optional only when naturally available and prospectively defined:
+**RQ4 — information structure (exploratory).** How do actor/observer status, information locality and initial disagreement relate to forecast errors?
 
-- `designated_expert` or `owner_forecast`;
-- `existing_data_model` produced for operational reasons independently of this study.
+## 3. Target population and weighting
 
-No baseline may be invented after seeing outcomes solely because it makes one method look better or worse.
+Before Study 0B collection, define the target population as all admissible Forecast Contracts encountered during a fixed calendar window from named event families.
 
-## 4. Study window and stopping
+Every admissible resolved contract receives equal weight in the primary estimand. Contracts sharing a release, campaign, environment episode or other dependent operational episode share a prospectively assigned cluster_id. Uncertainty is resampled by cluster.
 
-Deployment must choose **one prospective stopping rule** before outcome visibility:
+Event-family-stratified summaries are sensitivity/descriptive analyses and do not replace the all-contract primary estimand unless prospectively declared otherwise.
 
-- fixed calendar window `[START, END]`; or
-- fixed number `[J_TARGET]` of resolved admissible contracts with a maximum calendar end.
+## 4. Same-time institutional and collective references
 
-Recommended feasibility target: approximately 20-40 resolved contracts across multiple event families. This is an estimation target, not a universal power claim.
+At freeze time T_f, capture privately and without cross-exposure:
 
-If fewer than 20 admissible contracts resolve by the frozen end, report feasibility/descriptive results and do not promote C2 as established.
+### R0 — historical base rate
 
-No outcome-dependent early stopping is allowed.
+A probability p_base derived from a prospectively specified historical reference class. The deployment-specific preregistration must define:
 
-## 5. Participants
+- event-family definition;
+- lookback window;
+- inclusion/exclusion rule;
+- treatment of sparse history;
+- rule for freezing the computed base rate.
 
-Eligibility:
+If a defensible base rate cannot be constructed, the contract may remain informative for Study 0A but is not admissible for the confirmatory Study 0B comparison.
 
-- legitimate professional knowledge relevant to at least one contract;
-- voluntary consent under the applicable organizational process;
-- no requirement to forecast every contract.
+### R1 — institutional signal
 
-Per-contract fields:
+Capture:
 
-- probability 0-100%;
+- p_owner in [0,1], privately elicited from the accountable owner;
+- official status already in force at T_f, such as the existing RAG/readiness status;
+- source of that official status.
+
+The official status remains descriptive unless a numeric mapping was prospectively defined before outcomes.
+
+### R2 — private collective signal
+
+Each participant supplies, privately:
+
+- own probability p_i in [0,1];
+- expected mean probability m_i that other eligible forecasters will report, in [0,1];
 - role category;
-- information visibility: `common | local_to_role | mixed`;
-- ability to influence outcome: `none | indirect | direct`;
-- `outcome_already_known`: yes/no;
-- category of additional evidence that would most change the estimate;
-- optional short rationale only if approved for the private deployment.
+- information visibility: common | local_to_role | mixed;
+- ability_to_influence: none | indirect | direct;
+- outcome_already_known: yes | no;
+- ai_assistant_consulted: yes | no;
+- category of additional evidence most likely to change the estimate.
 
-`outcome_already_known=yes` is an abstention, not a forecast.
+No participant sees any other forecast, meta-prediction or aggregate before resolution.
 
-## 6. Independence and exposure
+## 5. Primary collective aggregator
 
-Independent forecasts must be collected **before** the participant can see the market state for that contract. The interface must not prepopulate a reference probability.
+The deployment must freeze one primary crowd aggregator before outcomes.
 
-After the independent forecast is frozen, the participant may enter the market phase and see the market according to the chosen platform configuration.
+Default protocol candidate:
 
-## 7. Market configuration
+1. clip each p_i and m_i to [0.01,0.99] for logit arithmetic only;
+2. compute L_bar = mean(logit(p_i));
+3. compute M_bar = mean(logit(m_i));
+4. use a fixed a = 2.0;
+5. compute p_crowd = logistic(M_bar + a * (L_bar - M_bar)).
 
-Freeze and export:
+This is a project implementation inspired by shared-information/meta-belief aggregation literature. It is not claimed to reproduce any published algorithm exactly.
 
-- platform/product/version;
-- market-maker algorithm and parameters;
-- initial probability;
-- virtual bankroll/reward rule;
-- opening/closing times;
-- participant visibility rules;
-- whether rationales or social signals are visible;
-- any AI/news/retrieval assistance.
+The value a = 2.0 is fixed prospectively and must not be retuned on Study 0 outcomes. Raw mean and median remain required comparators.
 
-Default Study 0 preference: disable external AI/news synthesis and automated web retrieval so the measured signal remains attributable to participating humans plus the market mechanism. Any deviation must be explicit.
+## 6. Primary estimands
 
-## 8. Resolution and evidence
+For binary outcome y_j in {0,1}, this project uses the normalized binary quadratic/Brier loss:
 
-Each contract must pass the JSON schema and identify a pre-existing authoritative evidence source. Resolution is performed by a resolver who did not set the market price and follows the frozen rule mechanically where possible.
+BS(p,y) = (p-y)^2.
+
+The original two-category Brier index can be written as twice this value for a binary event; this repository uses the normalized one-component convention consistently.
+
+Primary paired contrast:
+
+Delta_owner,j = BS(p_crowd,j,y_j) - BS(p_owner,j,y_j).
+
+Required reference contrast:
+
+Delta_base,j = BS(p_crowd,j,y_j) - BS(p_base,j,y_j).
+
+Report mean paired contrasts over the target population and cluster-bootstrap uncertainty.
+
+Negative values indicate lower observed loss for the crowd on the sampled target population. They do not by themselves establish general superiority or decision value.
+
+## 7. Continuation decision rule
+
+Study 0 is an estimation study, not a powered market-comparison trial.
+
+Before Study 0B outcomes, the deployment-specific preregistration must freeze:
+
+- minimum number of admissible resolved contracts J_min;
+- minimum number of independent clusters K_min;
+- a practically tolerable non-inferiority margin delta_NI on the Brier-loss scale for crowd vs owner;
+- the rule for deciding whether Study 1 is justified.
+
+Recommended structural minimums are J_min >= 30 and K_min >= 8, but the non-inferiority margin is domain-specific and must not be invented after outcome inspection.
+
+A generic continuation rule is:
+
+- feasibility thresholds met;
+- upper bound of the preregistered interval for mean Delta_owner does not exceed delta_NI;
+- mean Delta_base is not materially worse than zero under the separately frozen base-rate criterion;
+- no unresolved organizational or confidentiality issue.
+
+Failing this rule means stop/redesign, not "negative proof" that distributed knowledge has no value.
+
+## 8. Participant composition and admissibility
+
+Predeclare actor/observer participation requirements. Recommended default for a primary contract:
+
+- at least 4 valid private forecasts total;
+- at least 2 observers with ability_to_influence = none;
+- at least 2 actors with ability_to_influence = indirect or direct.
+
+If the deployment cannot sustain those quotas, specify a different fixed rule before outcomes. Contracts that fail the frozen composition rule remain in feasibility accounting but are outside the primary forecast comparison.
+
+Report:
+
+- all-participant aggregate;
+- actor-only aggregate;
+- observer-only aggregate.
+
+No one who already knows the outcome contributes a forecast.
+
+## 9. Independence and data custody
+
+The elicitation interface must not display:
+
+- any reference probability;
+- another participant's forecast;
+- owner probability;
+- base rate;
+- aggregate;
+- market price.
+
+An independent data custodian stores forecasts until resolution. A principal investigator, data steward or analyst who has decision authority within a contract's operational scope must not access pre-resolution aggregates for that contract.
+
+Longitudinal individual track records, if retained for research, are covered by the no-HR-use rule.
+
+## 10. AI-assistance metadata
+
+Private does not necessarily mean independent. Forecasters may consult the same AI assistant or shared source.
+
+Record ai_assistant_consulted as yes/no and, if organizationally permissible, an approved coarse assistance category. Do not collect prompts or confidential transcripts in the public research dataset.
+
+AI use is descriptive in Study 0 unless separately preregistered.
+
+## 11. Resolution and evidence
+
+Each contract must pass the schema and identify pre-existing authoritative evidence.
 
 Resolution statuses:
 
-- `RESOLVED_TRUE`
-- `RESOLVED_FALSE`
-- `VOID_AMBIGUOUS`
-- `VOID_MISSING_EVIDENCE`
-- `VOID_INTERFERENCE`
+- RESOLVED_TRUE
+- RESOLVED_FALSE
+- VOID_AMBIGUOUS
+- VOID_MISSING_EVIDENCE
 
-Voids remain in the audit ledger and are excluded from the primary scoring estimand for the declared reason; they are not deleted.
+Interference is recorded separately and is not itself a resolution status.
 
-## 9. Interference classification
+A resolver follows the frozen rule and, where feasible, is distinct from the accountable owner and data custodian.
 
-`I=0`: no observed change attributable to the forecasting exercise.
+## 12. Interference assessment
 
-`I=1`: discussion/attention was triggered, but no material operational action or decision was changed.
+Private elicitation can itself prompt reflection even when no aggregate is shown.
 
-`I=2`: forecast/market exposure materially altered the operational action, decision, timing, resource allocation, or evidence-generation path.
+An independent custodian or designated assessor assigns I in {0,1,2} after the forecast window using a frozen rubric and without seeing forecast accuracy when feasible:
 
-Primary Study 0 scoring excludes `I=2` contracts because the study is no longer observing the unperturbed path. Report them separately as protocol interference evidence.
+- I=0: no detected study-caused operational change;
+- I=1: discussion/attention but no material change;
+- I=2: material change in action, timing, resources or evidence generation plausibly caused by study participation.
 
-## 10. Primary metrics
+Primary analysis is intention-to-observe: otherwise resolvable I=2 contracts remain in the primary dataset. A preregistered sensitivity analysis excludes I=2. Therefore C0B can claim only absence/presence of **detected** interference.
 
-- Brier score by method;
-- paired event/cluster-level Brier difference, market minus mean;
-- contract resolution/void rate;
-- participation rate and abstention rate;
-- participant burden (median and distribution of completion time if collectable without surveillance);
-- interference distribution.
+## 13. Metrics
 
-Secondary/descriptive:
+Confirmatory/pre-specified:
 
-- calibration/reliability plot with uncertainty shown;
-- log score with probabilities clipped prospectively at `epsilon=0.01` for numerical safety;
-- forecast sharpness/dispersion, interpreted only alongside calibration;
-- market movement from independent mean to close;
-- belief dispersion using clipped logit probabilities;
-- role diversity and local-information fraction;
-- trajectories over time without treating timestamps as independent observations.
-
-## 11. Randomness and uncertainty
-
-Reference bootstrap seed: `20260925` unless deployment-specific preregistration freezes another integer before outcomes.
-
-Default uncertainty summary for the primary paired difference: 10,000 nonparametric bootstrap resamples of the independent event **cluster** units, percentile 95% interval, plus the raw event-level paired differences. If fewer than 8 independent clusters exist, the interval is reported as exploratory and no asymptotic precision claim is made.
-
-A sensitivity analysis reports the event-level paired mean and a cluster-robust or cluster-aggregated alternative when multiple contracts share a cluster.
-
-## 12. Confirmatory vs exploratory boundary
-
-Confirmatory for Study 0:
-
-- RQ0 feasibility measures;
-- RQ2 paired market-vs-mean estimand under the frozen admissibility rule.
+- Study 0A funnel and clean-resolution rates;
+- mean Delta_owner;
+- mean Delta_base;
+- participation and composition admissibility;
+- burden and detected interference.
 
 Descriptive:
 
-- calibration diagnostics given small sample sizes;
-- mean/median/expert/model comparisons beyond the primary pair.
+- Brier loss by owner, base rate, primary crowd, mean and median;
+- official-status/outcome cross-tabulation;
+- calibration/reliability plots with counts and uncertainty;
+- sharpness;
+- actor-only and observer-only scores.
 
 Exploratory:
 
-- association of aggregation gain with diversity, local information, role, forecast movement, or actor/observer status;
-- human-machine fusion.
+- meta-recalibration vs raw mean/median;
+- association with information locality, AI-assistance flag and belief dispersion;
+- "officially green at T_f but private crowd below 0.5" cases and their eventual outcomes.
 
-## 13. Publication rule
+## 14. Randomness and uncertainty
 
-Report null, adverse and ambiguous outcomes. Do not label the market "better" from a negative point estimate alone. State the sampled population, event families, calendar period, exclusion counts, uncertainty interval, and platform configuration.
+Reference bootstrap seed: 20260926 unless a deployment freezes another integer before outcomes.
+
+Use 10,000 nonparametric bootstrap resamples of independent cluster units. The analysis implementation must reject fewer than 2 clusters. If K < 8, interval-based inference is labelled exploratory even when the point estimate is reported.
+
+A sensitivity analysis reports:
+
+- equal-contract weighting;
+- cluster-aggregated weighting;
+- actor-only and observer-only contrasts.
+
+## 15. Stopping
+
+Freeze one rule before collection:
+
+- fixed calendar window; or
+- fixed number of admissible resolved contracts plus a maximum calendar end.
+
+No outcome-dependent stopping is allowed.
+
+## 16. Publication rule
+
+Report every registered contract, including rejected, void, under-participated and missing-evidence cases. Report null and adverse results. State the exact target population, event families, calendar period, base-rate construction, exclusions, cluster count, participant composition and aggregation constants.
+
+Study 0 must not be described as a prediction-market evaluation.
