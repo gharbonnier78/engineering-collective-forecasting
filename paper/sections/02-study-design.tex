@@ -1,9 +1,9 @@
 \section{Study 0 design}
 
 \subsection{Study 0A: dry contract funnel}
-Study~0A runs before participant forecasting. During a frozen 4--6 week intake window, candidate events from predeclared engineering families are logged prospectively. No market and no forecast participants are used. Each candidate is evaluated for importance, uncertainty, resolvability, authoritative evidence, confidentiality safety, non-interference suitability and availability of a defensible base-rate reference class.
+Study~0A runs before participant forecasting. During a frozen 4--6 week intake window, candidate events from predeclared engineering families are logged prospectively. No market and no forecast participants are used. Each candidate is evaluated for importance, uncertainty, resolvability, authoritative evidence, confidentiality safety and non-interference suitability. Base-rate availability is recorded but is not itself an admission criterion.
 
-Passing candidates are frozen as Forecast Contracts and later resolved using their declared evidence. Study~0A estimates the candidate-to-admissible and admissible-to-clean-resolution fractions. This is the primary feasibility test.
+Passing candidates are frozen as Forecast Contracts and later resolved using their declared evidence. Study~0A estimates the candidate-to-admissible and admissible-to-clean-resolution fractions. Before intake, the protocol freezes a minimum admissible yield, a minimum clean-resolution rate and a maximum projected time to reach the Study~0B structural targets. The protocol-candidate defaults are 0.30, 0.80 and 26 weeks respectively, with $J_{min}=30$ contracts and $K_{min}=8$ independent clusters. Candidate actor/observer pool counts and drafting effort are collected without participant forecasting. This is the primary feasibility test.
 
 \subsection{Study 0B: private forecasting}
 Study~0B starts only if Study~0A and governance gates justify continuation. At a common freeze time $T_f$, the study captures:
@@ -13,9 +13,9 @@ p_j^{\mathrm{owner}},\qquad
 s_j^{\mathrm{official}},\qquad
 \{p_{ij},m_{ij}\}_{i=1}^{n_j}.
 \]
-The first term is the historical base rate for the frozen reference class, the second is the accountable owner's private probability, the third is the existing official status, and the final pair contains each participant's own probability and expected peer-average probability.
+The first term is present when a defensible historical base rate exists, the second is the accountable owner's private probability, the third is the existing official status, and the final pair contains each participant's own probability and expected peer-average probability. Absence of a defensible base rate does not remove an otherwise-admissible contract from the primary crowd-versus-owner comparison.
 
-No participant sees another forecast, the base rate, owner forecast or any aggregate before resolution. The data custodian also hides aggregates from any study-team member with decision authority over the contract.
+No participant sees another forecast, the base rate, owner forecast or any aggregate before resolution. The data custodian also hides aggregates from any study-team member with decision authority over the contract. Eligible forecasters must have role-relevant knowledge of the event, its generating process or its evidence path; uninformed observers cannot be recruited merely to satisfy a quota. The accountable owner may also forecast only if independently eligible, but the primary crowd aggregate excludes that owner and an including-owner aggregate is descriptive.
 
 \begin{figure}[ht]
 \centering
@@ -35,8 +35,8 @@ No participant sees another forecast, the base rate, owner forecast or any aggre
 \draw[arrow] (funnel) -- (contract);
 \draw[arrow] (contract) -- (inst);
 \draw[arrow] (contract) -- (crowd);
-\draw[arrow] (inst) -- (outcome);
-\draw[arrow] (crowd) -- (outcome);
+\draw[arrow] (inst) -- (analysis);
+\draw[arrow] (crowd) -- (analysis);
 \draw[arrow] (outcome) -- (analysis);
 \end{tikzpicture}
 \caption{Minimum-sufficient Study~0 sequence. No aggregate is exposed before resolution.}
@@ -54,7 +54,7 @@ Element & Frozen content \\
 \midrule
 Event & question, binary outcome, cluster, open/close/resolve times \\
 Resolution & authoritative evidence, rule, resolver and ambiguity handling \\
-Institutional reference & event-family base-rate rule, owner role and official-status source \\
+Institutional reference & base-rate availability/rule, owner role and official-status source \\
 Participants & eligibility, actor/observer quotas, abstention and AI-assistance metadata \\
 Aggregation & raw mean/median plus fixed meta-belief rule and constants \\
 Analysis & Brier convention, estimands, cluster bootstrap, stopping and continuation rule \\
@@ -99,7 +99,7 @@ The primary paired contrast is
 -
 \BS\!\left(p_j^{\mathrm{owner}},y_j\right).
 \]
-The required reference contrast is
+For contracts with a defensible prospectively frozen base rate, the required reference contrast is
 \[
 \Delta_j^{\mathrm{base}}
 =
@@ -107,7 +107,7 @@ The required reference contrast is
 -
 \BS\!\left(p_j^{\mathrm{base}},y_j\right).
 \]
-Each admissible resolved contract receives equal weight in the primary estimand. Cluster identifiers are assigned prospectively when contracts share an operational episode; bootstrap resampling occurs at that cluster level.
+Each otherwise-admissible resolved contract receives equal weight in the primary crowd-versus-owner estimand; $\Delta^{\mathrm{base}}$ is reported on the explicitly enumerated base-rate-available subset. Cluster identifiers are assigned prospectively when contracts share an operational episode; bootstrap resampling occurs at that cluster level.
 
 \subsection{Why the mean remains useful}
 For the arithmetic mean $\bar p$,
@@ -121,4 +121,4 @@ For the arithmetic mean $\bar p$,
 The identity shows how disagreement can improve the squared-error performance of an average relative to average individual error. It does not imply that probability averaging fully pools independent evidence.
 
 \subsection{Calibration and sample size}
-Calibration and sharpness are reported descriptively at Study~0 scale. A deployment-specific preregistration must freeze a minimum contract count, minimum independent-cluster count and a practically meaningful continuation/non-inferiority margin before outcomes. The protocol recommends at least 30 admissible contracts and 8 clusters as structural minima, not as universal power guarantees. A null result at small sample size is not evidence that distributed knowledge is absent.
+Calibration and sharpness are reported descriptively at Study~0 scale. The protocol-candidate continuation gate uses $J_{min}=30$, $K_{min}=8$ and $\delta_{NI}=0.02$ on the normalized Brier-loss scale unless a deployment freezes different values before Study~0A begins. At this scale the gate is deliberately a screening/non-inferiority rule: it can reject a crowd that is clearly worse than the owner but cannot establish that the crowd is better. If reliable discrimination near equality is required, a larger $J$ must be planned prospectively rather than widening the margin after outcomes.
