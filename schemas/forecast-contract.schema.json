@@ -19,24 +19,58 @@
     "freeze"
   ],
   "properties": {
-    "id": {"type": "string", "pattern": "^FC-[A-Za-z0-9._-]+$"},
-    "version": {"type": "string", "minLength": 1},
-    "status": {"enum": ["draft", "frozen", "closed", "resolved", "void"]},
-    "question": {"type": "string", "minLength": 20},
-    "cluster_id": {"type": "string", "minLength": 1},
+    "id": {
+      "type": "string",
+      "pattern": "^FC-[A-Za-z0-9._-]+$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "frozen",
+        "closed",
+        "resolved",
+        "void"
+      ]
+    },
+    "question": {
+      "type": "string",
+      "minLength": 20
+    },
+    "cluster_id": {
+      "type": "string",
+      "minLength": 1
+    },
     "outcome": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["type", "labels"],
+      "required": [
+        "type",
+        "labels"
+      ],
       "properties": {
-        "type": {"const": "binary"},
+        "type": {
+          "const": "binary"
+        },
         "labels": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["true", "false"],
+          "required": [
+            "true",
+            "false"
+          ],
           "properties": {
-            "true": {"type": "string", "minLength": 1},
-            "false": {"type": "string", "minLength": 1}
+            "true": {
+              "type": "string",
+              "minLength": 1
+            },
+            "false": {
+              "type": "string",
+              "minLength": 1
+            }
           }
         }
       }
@@ -44,42 +78,148 @@
     "timing": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["elicitation_opens_at", "private_forecasts_close_at", "resolves_no_later_than"],
+      "required": [
+        "elicitation_opens_at",
+        "private_forecasts_close_at",
+        "resolves_no_later_than"
+      ],
       "properties": {
-        "elicitation_opens_at": {"type": "string", "format": "date-time"},
-        "private_forecasts_close_at": {"type": "string", "format": "date-time"},
-        "resolves_no_later_than": {"type": "string", "format": "date-time"}
+        "elicitation_opens_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "private_forecasts_close_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "resolves_no_later_than": {
+          "type": "string",
+          "format": "date-time"
+        }
       }
     },
     "resolution": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["rule", "authoritative_evidence", "resolver_role", "ambiguity_rule"],
+      "required": [
+        "rule",
+        "authoritative_evidence",
+        "resolver_role",
+        "ambiguity_rule"
+      ],
       "properties": {
-        "rule": {"type": "string", "minLength": 20},
-        "authoritative_evidence": {"type": "string", "minLength": 3},
-        "resolver_role": {"type": "string", "minLength": 2},
-        "ambiguity_rule": {"type": "string", "minLength": 10}
+        "rule": {
+          "type": "string",
+          "minLength": 20
+        },
+        "authoritative_evidence": {
+          "type": "string",
+          "minLength": 3
+        },
+        "resolver_role": {
+          "type": "string",
+          "minLength": 2
+        },
+        "ambiguity_rule": {
+          "type": "string",
+          "minLength": 10
+        }
       }
     },
     "institutional_reference": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["base_rate_reference_class", "base_rate_source", "accountable_owner_role", "official_status_source"],
+      "required": [
+        "base_rate_status",
+        "accountable_owner_role",
+        "official_status_source"
+      ],
       "properties": {
-        "base_rate_reference_class": {"type": "string", "minLength": 3},
-        "base_rate_source": {"type": "string", "minLength": 3},
-        "accountable_owner_role": {"type": "string", "minLength": 2},
-        "official_status_source": {"type": "string", "minLength": 3}
-      }
+        "base_rate_status": {
+          "enum": [
+            "available",
+            "unavailable"
+          ]
+        },
+        "base_rate_reference_class": {
+          "type": "string",
+          "minLength": 3
+        },
+        "base_rate_source": {
+          "type": "string",
+          "minLength": 3
+        },
+        "base_rate_unavailable_reason": {
+          "type": "string",
+          "minLength": 3
+        },
+        "accountable_owner_role": {
+          "type": "string",
+          "minLength": 2
+        },
+        "official_status_source": {
+          "type": "string",
+          "minLength": 3
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "base_rate_status": {
+                "const": "available"
+              }
+            },
+            "required": [
+              "base_rate_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "base_rate_reference_class",
+              "base_rate_source"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "base_rate_status": {
+                "const": "unavailable"
+              }
+            },
+            "required": [
+              "base_rate_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "base_rate_unavailable_reason"
+            ]
+          }
+        }
+      ]
     },
     "context": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["shared_information", "exclusions"],
+      "required": [
+        "shared_information",
+        "exclusions"
+      ],
       "properties": {
-        "shared_information": {"type": "array", "items": {"type": "string"}},
-        "exclusions": {"type": "array", "items": {"type": "string"}}
+        "shared_information": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "safeguards": {
@@ -96,23 +236,52 @@
         "data_custodian_role"
       ],
       "properties": {
-        "shadow_mode": {"const": true},
-        "aggregate_visible_to_participants_before_resolution": {"const": false},
-        "aggregate_visible_to_decision_owner_before_resolution": {"const": false},
-        "aggregate_visible_to_study_decision_scope_before_resolution": {"const": false},
-        "individual_hr_use": {"const": false},
-        "individual_track_record_hr_use": {"const": false},
-        "real_money": {"const": false},
-        "data_custodian_role": {"type": "string", "minLength": 2}
+        "shadow_mode": {
+          "const": true
+        },
+        "aggregate_visible_to_participants_before_resolution": {
+          "const": false
+        },
+        "aggregate_visible_to_decision_owner_before_resolution": {
+          "const": false
+        },
+        "aggregate_visible_to_study_decision_scope_before_resolution": {
+          "const": false
+        },
+        "individual_hr_use": {
+          "const": false
+        },
+        "individual_track_record_hr_use": {
+          "const": false
+        },
+        "real_money": {
+          "const": false
+        },
+        "data_custodian_role": {
+          "type": "string",
+          "minLength": 2
+        }
       }
     },
     "freeze": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
-        "frozen_at": {"type": "string", "format": "date-time"},
-        "commit_or_digest": {"type": "string", "minLength": 7}
+        "frozen_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "commit_or_digest": {
+          "type": "string",
+          "minLength": 7
+        }
       },
-      "required": ["frozen_at", "commit_or_digest"],
+      "required": [
+        "frozen_at",
+        "commit_or_digest"
+      ],
       "additionalProperties": false
     }
   },
@@ -120,13 +289,24 @@
     {
       "if": {
         "properties": {
-          "status": {"enum": ["frozen", "closed", "resolved", "void"]}
+          "status": {
+            "enum": [
+              "frozen",
+              "closed",
+              "resolved",
+              "void"
+            ]
+          }
         },
-        "required": ["status"]
+        "required": [
+          "status"
+        ]
       },
       "then": {
         "properties": {
-          "freeze": {"type": "object"}
+          "freeze": {
+            "type": "object"
+          }
         }
       }
     }
