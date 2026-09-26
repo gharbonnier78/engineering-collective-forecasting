@@ -1,2 +1,2 @@
-contract_id,contract_version,cluster_id,event_family,opened_at,closed_at,resolution_status,outcome,interference_level,participants_independent,participants_market,market_close_probability,independent_mean_probability,independent_median_probability,void_reason
-FC-EXAMPLE-001,0.1,EXAMPLE-EPISODE-01,qualification,2026-10-01T08:00:00Z,2026-10-05T16:00:00Z,RESOLVED_TRUE,1,0,6,5,0.68,0.54,0.56,
+contract_id,contract_version,cluster_id,event_family,freeze_time,resolution_status,outcome,interference_level,participants_total,participants_actor,participants_observer,base_rate_probability,owner_probability,official_status,crowd_primary_probability,independent_mean_probability,independent_median_probability,void_reason
+FC-EXAMPLE-001,0.2,EXAMPLE-EPISODE-01,qualification,2026-10-01T12:00:00Z,RESOLVED_TRUE,1,0,6,3,3,0.40,0.55,GREEN,0.61,0.58,0.57,
