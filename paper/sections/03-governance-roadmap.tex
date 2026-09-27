@@ -8,53 +8,54 @@ A participant may consult an AI assistant only as a declared ancillary informati
 
 Private elicitation can still trigger reflection. The study therefore records \emph{detected} interference. Otherwise resolvable contracts remain in the intention-to-observe primary analysis; excluding detected material interference is a preregistered sensitivity analysis rather than a post-treatment void rule.
 
-\section{Claims and gates}
-Study~0 maintains a bounded claim ladder:
+\section{Protocol scope}
+The protocol separates four questions that should not be conflated:
 
 \begin{description}[leftmargin=2.15cm,style=nextline]
-\item[C0A Contract funnel] Can real events be prospectively specified and later resolved cleanly?
-\item[C0B Private feasibility] Can same-time private forecasts and institutional references be collected with acceptable burden and no detected material interference?
-\item[C1 Incremental signal] What is the paired crowd-versus-owner Brier difference, with base-rate skill reported where a defensible reference class exists?
-\item[C2 Aggregation] Exploratorily, how does fixed meta-belief recalibration compare with raw mean/median?
-\item[C3 Information structure] Exploratorily, how do actor/observer status and information locality relate to error?
-\item[C4 Market residual value] Future study only.
+\item[Contract feasibility] Can real engineering events be prospectively specified and later resolved cleanly?
+\item[Private feasibility] Can same-time private forecasts and institutional references be collected with acceptable burden and no detected material interference?
+\item[Incremental signal] What is the paired crowd-versus-owner Brier difference, with base-rate skill reported where a defensible reference class exists?
+\item[Mechanism extensions] How do aggregation variants, actor/observer structure, machine models or prediction markets behave after the private forecasting signal itself has been qualified?
 \end{description}
+
+Study~0 addresses the first three questions. It does not test operational decision value and must not be described as a prediction-market evaluation.
 
 \section{Threats to validity}
 \paragraph{Construct validity.}
 A precise Forecast Contract can still target an unimportant or gameable event. Official status is not itself a probability unless a mapping was frozen.
 
 \paragraph{Internal validity.}
-Private elicitation can change attention; actors can differ from observers; common data or common AI assistance can correlate forecasts; question wording can leak expectations.
+Private elicitation can change attention; actors can differ from observers; common data or common AI assistance can correlate forecasts; question wording can leak expectations. External question--behavior literature supports treating measurement reactivity as a real possibility, but does not quantify its magnitude in engineering work \citep{wood2016}.
 
 \paragraph{Statistical validity.}
-The number of independent contracts/clusters may be small, event families may be imbalanced, and exploratory comparisons can multiply. Cluster-level resampling and prospective funnel registration address only part of these limitations.
+The number of independent contracts/clusters may be small, event families may be imbalanced, and exploratory comparisons can multiply. Cluster-level resampling and prospective funnel registration address only part of these limitations. The design simulations in this paper characterize the continuation rule under stylized assumptions rather than converting the minimum scale into a universal power guarantee.
 
 \paragraph{External validity.}
-Results from one organization, calendar period or event family require replication. Corporate market evidence does not transfer automatically to engineering private polls.
+Results from one organization, calendar period or event family require replication. Corporate market evidence, crowd-wisdom experiments and software-effort estimation do not transfer automatically to engineering qualification forecasts.
 
 \paragraph{Causal validity.}
 Forecast performance is not a causal treatment effect. Conditional predictions do not become interventional quantities without a causal design.
 
-\section{Why prediction markets move to a later study}
-The minimum-sufficient-mechanism test asks what can be removed without losing the ability to answer the current research question. A private poll can test whether distributed knowledge adds signal beyond institutional baselines without exposing a social aggregate. A market adds price visibility, liquidity, mechanism parameters and behavioral feedback. Study~0 therefore removes it.
+\section{Subsequent research}
+Study~0A qualifies the event/contract funnel and Study~0B estimates private collective skill beyond same-time institutional references. A subsequent replication study can qualify private aggregation methods across event families and teams. From there, two independent branches become possible: one may test residual prediction-market value using an observers-only or explicitly intervention-aware design; another may study whether exposing qualified private forecast evidence changes evidence acquisition or real decisions. A prediction market is therefore not on the critical path to operational-value research. Human--machine combinations are deferred until an independently qualified structured model exists.
 
-A later Study~2 may compare a prediction market against a qualified private aggregator at the same information time, using either an observers-only arm or an explicitly intervention-aware design. That study would test \emph{residual market value}, not conflate market mechanics with later information or recalibration.
+A later sequential-decision program may treat a collective forecast as one observation or elicitation as an information-acquisition action with a cost and expected value of information. That possible bridge is not needed to justify Study~0.
 
-\section{Research roadmap}
-\textbf{Study~0A} qualifies the event/contract funnel. \textbf{Study~0B} estimates private collective skill beyond institutional references. \textbf{Study~1} replicates and qualifies private aggregation methods. After Study~1, two branches become possible: \textbf{Study~2} may test residual prediction-market value, while \textbf{Study~3} may independently study whether exposing qualified private forecast evidence changes evidence acquisition or real decisions. Study~3 does not depend on Study~2; a prediction market is not on the critical path to operational-value research. Human--machine combinations are deferred until an independently qualified model exists.
-
-A later sequential-decision programme may treat a collective forecast as one observation or elicitation as an information-acquisition action. That possible bridge is not needed to justify Study~0.
-
-\section{Pedagogical and knowledge-base boundary}
-Reusable concepts are capitalized separately in the Diderot MMALS/ML knowledge repository:
-\url{https://github.com/gharbonnier78/mmals-ml-wiki}.
-The teaching layer explains concepts and provenance; it is not scientific authority for this project's empirical claims.
-
-\section{Data and code availability}
-Protocol source, schemas, reference analysis code and synthetic templates are maintained at:
+\section{Data, code and publication boundary}
+Protocol source, schemas, reference analysis code, synthetic templates and design-simulation code are maintained at:
 \url{https://github.com/gharbonnier78/engineering-collective-forecasting}.
-A scientific report must cite the immutable commit actually used. Internal participant data and proprietary engineering evidence are not part of the public repository.
+A scientific report should cite the immutable repository release or commit actually used. Internal participant data and proprietary engineering evidence are not part of the public repository.
+
+Any live employee-data collection remains subject to the organization's privacy, security, HR/labor and compliance authorization. In addition, external publication of results derived from an employer's internal projects or systems requires explicit organizational release authorization, even when reported only in aggregate or anonymized form. This publication boundary is part of the protocol's governance gate and is not a claim that de-identification alone is sufficient for release.
+
+Reusable teaching material is maintained separately in the Diderot MMALS/ML knowledge repository so that pedagogical interpretation remains distinct from scientific evidence:
+\url{https://github.com/gharbonnier78/mmals-ml-wiki}.
+
+\section{Author and AI-assistance declaration}
+Guillaume Harbonnier is the sole author of this protocol and presents this manuscript as an independent researcher. Contact and version history are available through
+\url{https://github.com/gharbonnier78}.
+
+Generative AI assistants were used during literature discovery, drafting and editing, code generation, integration of reviewer feedback, and consistency checking. The author reviewed the cited sources, protocol decisions, generated code, simulations and final manuscript and remains responsible for all claims and errors. AI-generated text or code is not treated as scientific authority. This manuscript-preparation disclosure is distinct from the Study~0 participant variable that records whether a forecaster consulted an AI assistant.
 
 \section{Conclusion}
-The revised protocol deliberately tests the smallest mechanism that can answer the immediate question. First, establish that engineering events can be specified and resolved prospectively. Second, compare a private collective forecast with the organization's own same-time reference signals. Only then ask whether a prediction market, machine model or decision intervention adds residual value. The intended output of Study~0 is not a release gate; it is evidence about whether distributed engineering knowledge can be measured as a disciplined probabilistic signal.
+The protocol deliberately tests the smallest mechanism that can answer the immediate question. First, establish that engineering events can be specified and resolved prospectively. Second, compare a private collective forecast with the organization's own same-time reference signals. Only then ask whether a prediction market, machine model or decision intervention adds residual value. The intended output of Study~0 is not a release gate; it is evidence about whether distributed engineering knowledge can be measured as a disciplined probabilistic signal.
