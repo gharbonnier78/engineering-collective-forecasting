@@ -8,7 +8,7 @@ This repository studies **private collective forecasting first**, then progressi
 
 ## Status
 
-- Repository phase: **accepted protocol / pre-Study 0A**
+- Repository phase: **accepted protocol / publication-preprint preparation / pre-Study 0A**
 - Independent review: **ACCEPT; G1 released on 2026-09-27**
 - Study 0A: **dry Forecast Contract funnel, not launched**
 - Study 0B: **private shadow forecasting, not launched**
@@ -72,6 +72,14 @@ A Forecast Contract prospectively freezes the event, cluster, private-forecast w
 ## Public/private boundary
 
 The public repository contains only generic schemas, code, methods and approved aggregate results. Customer/program identifiers, employee identities, internal statuses, unreleased architectures, vulnerabilities, raw rationales and live vendor evaluations belong only in an approved private overlay that pins this repository by immutable commit.
+
+## Publication preparation
+
+The accepted Study 0A/0B design is being prepared as an external protocol preprint without changing the accepted scientific baseline. Publication-facing additions include a dedicated related-work section, explicit protocol contributions, preserved design-simulation evidence, an author/AI-assistance declaration and a publication plan.
+
+- Publication plan: `docs/publication-plan.md`
+- Design simulations: `analysis/design_simulation/`
+- Scientific baseline merged at: `b38feb509f9b3ed94e37f590b441e0e906601341`
 
 ## Validation
 
