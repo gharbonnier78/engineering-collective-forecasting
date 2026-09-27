@@ -1,4 +1,4 @@
-.PHONY: validate test paper clean paper-repro
+.PHONY: validate test paper clean paper-repro design-sim
 
 validate:
 	python scripts/validate_repo.py
@@ -19,3 +19,7 @@ paper-repro:
 	bash scripts/build_paper.sh
 	cmp /tmp/ecf-paper-first.pdf paper/engineering_collective_forecasting.pdf
 	sha256sum paper/engineering_collective_forecasting.pdf
+
+design-sim:
+	cd analysis/design_simulation && python sim_pivot.py
+	cd analysis/design_simulation && python sim_continuation.py

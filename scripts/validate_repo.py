@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import csv
 import json
+import hashlib
 from datetime import datetime
 from pathlib import Path
 
@@ -401,7 +402,19 @@ def main() -> None:
     if "PARTIAL ACCEPT" not in chronicle or "G1 may therefore be released" not in chronicle:
         fail("independent review/verification history is not preserved in Chronicle")
 
-    print("PASS: structural, schema, lifecycle-template and claim-boundary checks")
+    design_hashes = {
+        "analysis/design_simulation/sim_pivot.py": "66d49f55365845484fbec94a2a0b3e82b392729c9f86f9ae543566c28fa39591",
+        "analysis/design_simulation/sim_continuation.py": "e0808ffc177e62ee7e051bb11575204dc1f2f56c67a9c9ccfb08078ed215ce30",
+    }
+    for path, expected_sha256 in design_hashes.items():
+        p = ROOT / path
+        if not p.exists():
+            fail(f"missing preserved design simulation: {path}")
+        actual = hashlib.sha256(p.read_bytes()).hexdigest()
+        if actual != expected_sha256:
+            fail(f"design simulation provenance mismatch for {path}: {actual}")
+
+    print("PASS: structural, schema, lifecycle-template, design-simulation provenance and claim-boundary checks")
 
 
 if __name__ == "__main__":

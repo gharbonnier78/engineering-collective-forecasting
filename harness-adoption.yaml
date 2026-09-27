@@ -34,6 +34,7 @@ artifacts:
     - paper/engineering_collective_forecasting.tex
   evidence:
     - studies/study-0-shadow-forecasting/evidence/README.md
+    - analysis/design_simulation/README.md
   scientific_gates:
     - research/gates.yaml
   chronicle:
@@ -41,7 +42,7 @@ artifacts:
   pedagogy:
     - docs/pedagogy.md
     - research/sources/
-  handoff: "research/chronicle/2026-09-26--review-v2-redesign.md"
+  handoff: "research/chronicle/2026-09-27--protocol-publication-prep.md"
 
 execution:
   engineering:
@@ -69,8 +70,8 @@ execution:
     - "make paper"
   randomness:
     status: "declared"
-    root_entropy_policy: "Reference uncertainty analysis uses the frozen integer seed declared in the deployment preregistration and resamples independent operational clusters, never participant rows or timestamps."
-    lineage_artifact: "studies/study-0-shadow-forecasting/preregistration.md"
+    root_entropy_policy: "Reference uncertainty analysis uses the frozen integer seed declared in the deployment preregistration and resamples independent operational clusters, never participant rows or timestamps. Publication design simulations preserve the independently frozen seeds 20260926 and 20260927 and their source SHA-256 values."
+    lineage_artifact: "studies/study-0-shadow-forecasting/preregistration.md; analysis/design_simulation/README.md"
   concurrency:
     status: "not_applicable"
     reference_path: null
@@ -89,6 +90,6 @@ deviations:
 
 adoption:
   adopted_at: "2026-09-25"
-  amended_at: "2026-09-26"
+  amended_at: "2026-09-27"
   adopted_by: "ChatGPT with explicit user authorization"
-  notes: "Bootstrap protocol received independent PARTIAL ACCEPT at c8a3516. The 2026-09-26 amendment applies SDR-002 by removing the prediction market from Study 0, adding a dry contract funnel and redefining incremental usefulness against owner, official status and base-rate references."
+  notes: "The Study 0A/0B protocol was independently accepted and merged at b38feb509f9b3ed94e37f590b441e0e906601341. The 2026-09-27 publication-preparation work preserves that accepted scientific baseline while adding related work, design-simulation provenance and external publication framing."

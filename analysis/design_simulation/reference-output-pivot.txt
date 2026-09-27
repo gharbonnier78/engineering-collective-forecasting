@@ -1,0 +1,37 @@
+contrôles de code : OK (quadrature = Monte-Carlo ; sans info privée ni bruit, ext@méta = moyenne ; sans info publique, méta moins extrême)
+
+climatologie BS = 0.2275 | configuration primaire : a=2, λ=0,3, méta en probabilité, σ_m=0,3
+
+S1 info privée dominante
+  BS : individuel 0.1778 | moyenne 0.1484 | ext@0.5 0.1314 | ext@base 0.1163 | ext@méta 0.1176 | marché 0.0721 | marché mince 0.0785
+  part de l'écart moyenne→marché idéal comblée : ext@0.5 +22% | ext@base +42% | ext@méta +40%
+  ext@méta − moyenne = -0.0308  IC95 [-0.0310 ; -0.0306]
+  Δ marché(τ=0.0) − ext@méta : E=-0.0455  sd=0.1306  J(80 %)≈65
+  Δ marché(τ=0.75) − ext@méta : E=-0.0391  sd=0.1437  J(80 %)≈106
+
+S2 info commune dominante
+  BS : individuel 0.1661 | moyenne 0.1596 | ext@0.5 0.1692 | ext@base 0.1700 | ext@méta 0.1557 | marché 0.1403 | marché mince 0.1539
+  part de l'écart moyenne→marché idéal comblée : ext@0.5 -49% | ext@base -53% | ext@méta +20%
+  ext@méta − moyenne = -0.0039  IC95 [-0.0041 ; -0.0038]
+  Δ marché(τ=0.0) − ext@méta : E=-0.0154  sd=0.1063  J(80 %)≈375
+  Δ marché(τ=0.75) − ext@méta : E=-0.0019  sd=0.1472  J(80 %)≈49,629
+
+C1 (S2, pas de dégradation) : PASSE — borne haute -0.0038 (seuil +0,001)
+C2 (S1, gain ≥ ext@base)   : ÉCHOUE — 40% vs 42%
+
+Sensibilité (mêmes tirages)   a  λ    échelle | S1 part comblée | S2 ext@méta − moyenne [borne haute] | C1
+                              2  0.0  prob   |  +50%           | -0.0053 [-0.0052]                    | ok
+                              2  0.0  logit  |  +53%           | -0.0055 [-0.0053]                    | ok
+                              2  0.3  prob   |  +40%           | -0.0039 [-0.0038]                    | ok
+                              2  0.3  logit  |  +42%           | -0.0041 [-0.0039]                    | ok
+                              2  0.6  prob   |  +28%           | -0.0023 [-0.0022]                    | ok
+                              2  0.6  logit  |  +30%           | -0.0024 [-0.0023]                    | ok
+                              3  0.0  prob   |  +70%           | -0.0070 [-0.0067]                    | ok
+                              3  0.0  logit  |  +72%           | -0.0070 [-0.0067]                    | ok
+                              3  0.3  prob   |  +59%           | -0.0055 [-0.0052]                    | ok
+                              3  0.3  logit  |  +61%           | -0.0056 [-0.0053]                    | ok
+                              3  0.6  prob   |  +42%           | -0.0030 [-0.0028]                    | ok
+                              3  0.6  logit  |  +44%           | -0.0031 [-0.0029]                    | ok
+
+C1 pour λ ≤ 0,3 : 8/8 configurations
+Décision (règle figée) : RECOMMANDER comme agrégat prudent (C1 robuste, C2 échoue)
