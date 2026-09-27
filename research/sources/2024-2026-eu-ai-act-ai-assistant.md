@@ -12,9 +12,9 @@ canonical_sources:
 
 ## Supports
 
-Article 4 of Regulation (EU) 2024/1689 requires providers and deployers of AI systems to take measures, to their best extent, to ensure a sufficient level of AI literacy among staff and other persons operating or using AI systems on their behalf, taking account of their knowledge, experience, training and the context of use.
+Regulation (EU) 2026/1744, in force since 27 July 2026, replaced Article 4 of Regulation (EU) 2024/1689. Providers and deployers must take measures to support the development of AI literacy among staff and other persons operating or using AI systems on their behalf, taking account of technical knowledge, experience, education, training and context. The amended text explicitly states that they do not have to guarantee any specific level of AI literacy for an individual.
 
-European Commission guidance on Article 50 states that transparency obligations for certain interactive and generative AI systems apply from 2 August 2026. The Commission also clarifies that, where employees use an AI system under the instructions and control of a legal person, the legal person remains the deployer rather than each employee becoming a separate deployer.
+European Commission guidance states that Article 50 applies from 2 August 2026. A limited grace period applies only to AI systems placed on the market before that date and only for the Article 50(2) marking/detection obligation for AI-generated content; providers of those systems must comply with that obligation from 2 December 2026. The Commission also clarifies that, where employees use an AI system under the instructions and control of a legal person, the legal person remains the deployer rather than each employee becoming a separate deployer.
 
 Annex III identifies certain AI systems used in employment and worker management as high-risk, including systems intended to monitor/evaluate worker performance, allocate tasks based on individual behaviour or traits, or make employment-related decisions.
 
