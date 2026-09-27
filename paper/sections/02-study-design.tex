@@ -20,16 +20,16 @@ No participant sees another forecast, the base rate, owner forecast or any aggre
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[
-  node distance=7mm and 9mm,
-  box/.style={draw, rounded corners, align=center, inner sep=5pt, text width=3.2cm},
+  node distance=7mm and 10mm,
+  box/.style={draw, rounded corners, align=center, inner sep=5pt, text width=3.8cm, font=\small},
   arrow/.style={-{Latex[length=2mm]}, thick}
 ]
 \node[box] (cand) {planned engineering events};
 \node[box, below=of cand] (funnel) {Study 0A\\contract funnel};
 \node[box, below=of funnel] (contract) {frozen Forecast Contract};
-\node[box, below left=of contract] (inst) {same-time institutional\\base rate + owner + status};
-\node[box, below right=of contract] (crowd) {private crowd\\$p_i$ + meta $m_i$};
-\node[box, below=18mm of contract] (outcome) {authoritative\\resolved outcome};
+\node[box, below left=of contract] (inst) {institutional references\\owner + status + optional base rate};
+\node[box, below right=of contract] (crowd) {private forecasts\\$p_i$ + meta $m_i$};
+\node[box, below=20mm of contract] (outcome) {authoritative outcome\\resolved evidence};
 \node[box, below=of outcome] (analysis) {paired probabilistic\\evaluation};
 \draw[arrow] (cand) -- (funnel);
 \draw[arrow] (funnel) -- (contract);
