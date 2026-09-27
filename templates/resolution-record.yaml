@@ -1,6 +1,6 @@
 contract_id: FC-EXAMPLE-001
 contract_version: "0.2"
-resolution_status: RESOLVED_TRUE  # RESOLVED_TRUE | RESOLVED_FALSE | VOID_AMBIGUOUS | VOID_MISSING_EVIDENCE
+resolution_status: RESOLVED_TRUE  # RESOLVED_TRUE | RESOLVED_FALSE | VOID_AMBIGUOUS | VOID_MISSING_EVIDENCE | VOID_CANCELLED
 resolved_at: "2026-10-10T12:00:00Z"
 resolver_role: "independent evidence resolver"
 authoritative_evidence_ref: "private-system://approved-record-id"
