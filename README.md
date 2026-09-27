@@ -8,8 +8,8 @@ This repository studies **private collective forecasting first**, then progressi
 
 ## Status
 
-- Repository phase: **protocol redesign after independent review**
-- Independent review of bootstrap PR: **PARTIAL ACCEPT; G1 not released**
+- Repository phase: **accepted protocol / pre-Study 0A**
+- Independent review: **ACCEPT; G1 released on 2026-09-27**
 - Study 0A: **dry Forecast Contract funnel, not launched**
 - Study 0B: **private shadow forecasting, not launched**
 - Scientific claims: **none about operational benefit or prediction-market superiority**
@@ -55,11 +55,11 @@ No collective aggregate is shown to participants, decision owners, or members of
 
 At the same frozen time T_f, Study 0B records:
 
-- **R0 — base rate:** historical probability for the preregistered event family;
+- **R0 — base rate (when defensible):** historical probability for the preregistered event family;
 - **R1 — institutional signal:** accountable owner's private probability plus the official status already used by the organization;
 - **R2 — private collective signal:** independent probabilities plus a meta-prediction of the average probability expected from peers.
 
-The primary scientific question is **R2 vs R1**, with skill against **R0** as a required reference. Mean and median are retained; a prospectively fixed meta-belief recalibration is evaluated without tuning on Study 0 outcomes.
+The primary scientific question is **R2 vs R1**. Skill against **R0** is a required secondary reference only on the prospectively identified subset where a defensible historical reference class exists. Mean and median are retained; a prospectively fixed meta-belief recalibration is evaluated without tuning on Study 0 outcomes.
 
 ## Prediction markets
 
