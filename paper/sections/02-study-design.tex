@@ -3,7 +3,7 @@
 \subsection{Study 0A: dry contract funnel}
 Study~0A runs before participant forecasting. During a frozen 4--6 week intake window, candidate events from predeclared engineering families are logged prospectively. No market and no forecast participants are used. Each candidate is evaluated for importance, uncertainty, resolvability, authoritative evidence, confidentiality safety and non-interference suitability. Base-rate availability is recorded but is not itself an admission criterion.
 
-Passing candidates are frozen as Forecast Contracts and later resolved using their declared evidence. Study~0A estimates the candidate-to-admissible and admissible-to-clean-resolution fractions. Before intake, the protocol freezes a minimum admissible yield, a minimum clean-resolution rate and a maximum projected time to reach the Study~0B structural targets. The protocol-candidate defaults are 0.30, 0.80 and 26 weeks respectively, with $J_{min}=30$ contracts and $K_{min}=8$ independent clusters. Candidate actor/observer pool counts and drafting effort are collected without participant forecasting. This is the primary feasibility test.
+Passing candidates are frozen as Forecast Contracts and later resolved using their declared evidence. Study~0A estimates the candidate-to-admissible and admissible-to-clean-resolution fractions. Before intake, the protocol freezes a minimum admissible yield, a minimum clean-resolution rate and a maximum projected time to reach the Study~0B structural targets. The default protocol values are 0.30, 0.80 and 26 weeks respectively, with $J_{min}=30$ contracts and $K_{min}=8$ independent clusters. Candidate actor/observer pool counts and drafting effort are collected without participant forecasting. This is the primary feasibility test.
 
 \subsection{Study 0B: private forecasting}
 Study~0B starts only if Study~0A and governance gates justify continuation. At a common freeze time $T_f$, the study captures:
@@ -78,7 +78,7 @@ With
 \bar L=\frac1n\sum_iL_i,\qquad
 \bar M=\frac1n\sum_iM_i,
 \]
-the default protocol candidate uses the fixed transform
+the default protocol uses the fixed transform
 \[
 p^{\mathrm{crowd}}=\sigmoid\!\left(\bar M+a(\bar L-\bar M)\right),\qquad a=2.
 \]
@@ -121,4 +121,4 @@ For the arithmetic mean $\bar p$,
 The identity shows how disagreement can improve the squared-error performance of an average relative to average individual error. It does not imply that probability averaging fully pools independent evidence.
 
 \subsection{Calibration and sample size}
-Calibration and sharpness are reported descriptively at Study~0 scale. The protocol-candidate continuation gate uses $J_{min}=30$, $K_{min}=8$ and $\delta_{NI}=0.02$ on the normalized Brier-loss scale unless a deployment freezes different values before Study~0A begins. At this scale the gate is deliberately a screening/non-inferiority rule: it can reject a crowd that is clearly worse than the owner but cannot establish that the crowd is better. If reliable discrimination near equality is required, a larger $J$ must be planned prospectively rather than widening the margin after outcomes.
+Calibration and sharpness are reported descriptively at Study~0 scale. The default continuation gate uses $J_{min}=30$, $K_{min}=8$ and $\delta_{NI}=0.02$ on the normalized Brier-loss scale unless a deployment freezes different values before Study~0A begins. At this scale the gate is deliberately a screening/non-inferiority rule: it can reject a crowd that is clearly worse than the owner but cannot establish that the crowd is better. If reliable discrimination near equality is required, a larger $J$ must be planned prospectively rather than widening the margin after outcomes.
