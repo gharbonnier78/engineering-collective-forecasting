@@ -1,0 +1,35 @@
+\section{Design operating characteristics}
+
+The structural target of approximately 30 resolved contracts is not presented as a conventional power calculation for superiority. To make the continuation rule more interpretable before data collection, an independent design review evaluated toy operating characteristics for the rule
+\[
+\mathrm{UCB}_{0.975}\!\left(\overline{\Delta}^{\mathrm{owner}}\right)\le \delta_{NI},
+\qquad \delta_{NI}=0.02,
+\]
+where the upper bound is obtained by cluster bootstrap. The simulation uses $J=32$ contracts so that equal clusters can be formed for both $K=8$ and $K=16$. Outcomes follow a Bernoulli process with prevalence 0.65; six forecasters receive a mixture of public and conditionally independent private signals; reported logits and meta-predictions are noisy; and the crowd uses the preregistered $a=2$ meta-recalibration. Three owner configurations represent an optimistic actor, an unbiased one-signal owner and a better-informed four-signal owner. Contracts are independent across clusters, an optimistic assumption.
+
+Table~\ref{tab:continuation-oc} reports the probability that the continuation rule is met under the protocol-candidate margin $\delta_{NI}=0.02$. The values are Monte Carlo design evidence, not observations from an engineering organization.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{llrrr}
+\toprule
+Information regime & Owner model & $E[\Delta_{\mathrm{owner}}]$ & $K=8$ & $K=16$ \\
+\midrule
+Mostly private & optimistic actor & $-0.065$ & 78\% & 75\% \\
+Mostly private & unbiased & $-0.060$ & 72\% & 72\% \\
+Mostly private & well informed & $+0.016$ & 5\% & 4\% \\
+Mostly shared & optimistic actor & $-0.014$ & 53\% & 47\% \\
+Mostly shared & unbiased & $-0.010$ & 52\% & 47\% \\
+Mostly shared & well informed & $+0.004$ & 17\% & 14\% \\
+\bottomrule
+\end{tabular}
+\caption{Toy operating characteristics at $J=32$ and $\delta_{NI}=0.02$. Entries in the last two columns are the simulated probability of satisfying the Study~0B continuation rule. Negative $\Delta_{\mathrm{owner}}$ favors the private crowd.}
+\label{tab:continuation-oc}
+\end{table}
+
+The simulation supports a deliberately narrow interpretation of the minimum scale. When the crowd is clearly better in the toy mostly-private regime, the rule continues in roughly 72--78\% of simulated studies. When the owner is better, continuation falls to 4--17\% in the configurations shown. Near equality or modest crowd advantage is difficult to distinguish: continuation is only about 47--53\% in the mostly-shared one-signal-owner cases. Larger margins of 0.05 or 0.08 made the rule substantially more permissive in the same simulation and are therefore not substituted after observing Study~0 data.
+
+Consequently, $J_{\min}=30$, $K_{\min}=8$ and $\delta_{NI}=0.02$ define a \emph{screening/non-inferiority continuation gate}. They do not provide 80\% power for a superiority claim and do not establish that 30 contracts are universally sufficient. A deployment that requires reliable discrimination near equality must prospectively increase the target sample rather than reinterpret a null or widen the margin after outcomes.
+
+The exact reviewer-supplied simulation code, frozen seeds and reference outputs are retained under \texttt{analysis/design\_simulation/}. The simulation's purpose is transparency about the gate's behavior under explicit assumptions; it is not part of the empirical Study~0 evidence base.
