@@ -7,14 +7,14 @@ gates:
 
   - id: G1
     name: Protocol review
-    status: PENDING_REREVIEW
+    status: PASS
     criterion: "The redesigned minimum-sufficient Study 0A/0B protocol, schema, safeguards, analysis and paper receive independent exact-head review."
-    history: "Bootstrap head c8a3516 received PARTIAL ACCEPT on 2026-09-26; G1 was not released."
+    history: "Bootstrap head c8a3516 received PARTIAL ACCEPT on 2026-09-26. Bounded rereview then accepted R1-R6 at head 2d48711a67722762f9cec0392f3f912345bcbd86 on 2026-09-27; G1 released."
 
   - id: G2
     name: Organizational authorization
     status: NOT_STARTED
-    criterion: "Any Study 0B private pilot has explicit authorization for employee participation, data custody, confidentiality, non-HR use and non-interference."
+    criterion: "Any Study 0B private pilot has explicit authorization for employee participation, data custody, confidentiality, non-HR use and non-interference; any external publication of employer-derived results, even aggregated or anonymized, also requires explicit organizational authorization."
 
   - id: G3
     name: Prospective freeze
