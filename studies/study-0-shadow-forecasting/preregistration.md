@@ -238,12 +238,16 @@ AI use is descriptive in Study 0 unless separately preregistered.
 
 Each contract must pass the schema and identify pre-existing authoritative evidence.
 
-Resolution statuses:
+Lifecycle / terminal statuses:
 
+- PENDING_RESOLUTION (not terminal)
 - RESOLVED_TRUE
 - RESOLVED_FALSE
 - VOID_AMBIGUOUS
 - VOID_MISSING_EVIDENCE
+- VOID_CANCELLED
+
+A rejected Study 0A candidate that never becomes a Forecast Contract is recorded as `REJECTED_NOT_ADMITTED` in the funnel register, not as a resolution of a contract.
 
 Interference is recorded separately and is not itself a resolution status.
 
