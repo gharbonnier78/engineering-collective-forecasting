@@ -1,0 +1,9 @@
+J = 32 contrats ; règle : borne haute IC95 (bootstrap par cluster) de mean Δ_owner ≤ δ_NI
+
+scénario    propriétaire      E[Δ_owner] | K=8: δ=0.02 δ=0.05 δ=0.08 | K=16: δ=0.02 δ=0.05 δ=0.08
+S1 privée   acteur optimiste      -0.065 |           78%     95%     99% |           75%     95%     99%
+S1 privée   sans biais            -0.060 |           72%     92%     99% |           72%     92%     99%
+S1 privée   bien informé          +0.016 |            5%     21%     50% |            4%     18%     44%
+S2 commune  acteur optimiste      -0.014 |           53%     93%    100% |           47%     91%    100%
+S2 commune  sans biais            -0.010 |           52%     93%    100% |           47%     92%    100%
+S2 commune  bien informé          +0.004 |           17%     58%     88% |           14%     53%     88%
